@@ -38,7 +38,7 @@ router.get('/check/:identifier/d38d7d1738e2a0cf3cfa5d4ad805abe73ac77bb', (req, r
 router.post('/81abc52ad7185eac7c92', (req, res, next) => {
   let { errors, isValid } = addUserValidate(req.body);
   var token=randomstring.generate(64);
-  var link="http://"+req.get('host')+"/verify/"+token;
+  var link="http://"+req.get('host')+"/verify/user/"+token;
   if(!isValid) {
     res.status(500).json({ errors });
   } else if (isValid) {

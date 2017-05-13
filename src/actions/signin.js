@@ -40,3 +40,20 @@ export function getFacebookUser() {
     })
   }
 }
+
+
+export function getVerifyUser(usertoken) {
+  return dispatch => {
+    return axios.post(`/verify/user/${usertoken}`).then((res) => {
+      if(res.data.token) {
+        let token = res.data.token;
+        localStorage.setItem('jwtToken', token);
+        setAuthorization(token);
+        dispatch(setCurrentUser(jwt.decode(token)));
+        window.location = '/';
+      } else {
+        window.location = '/signin';
+      }
+    })
+  }
+}
