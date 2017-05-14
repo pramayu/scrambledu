@@ -20,6 +20,7 @@ var users = require('./models/user');
 var signup = require('./routers/signup');
 var signin = require('./routers/signin');
 var userverify = require('./routers/verify_user');
+var category = require('./routers/categories');
 
 var app = express();
 var compile = webpack(webpackConfig);
@@ -59,6 +60,7 @@ app.use(function(req, res, next){
   next();
 });
 
+app.use('/categories', category);
 app.use('/verify', userverify);
 app.use('/signin', signin);
 app.use('/signup', signup);

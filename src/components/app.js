@@ -2,20 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getFacebookUser } from '../actions/signin';
+import { getCategories } from '../actions/categories';
+import Navbar from '../shared/navbar';
 
 class App extends Component {
 
   componentWillMount() {
-    this.props.getFacebookUser()
+    this.props.getFacebookUser();
+    this.props.getCategories();
   }
 
   render() {
     return (
       <div>
-        <h1>Hello from react...</h1>
+        <Navbar categories={this.props.categories}/>
       </div>
     );
   }
 };
 
-export default connect(null, { getFacebookUser })(App);
+function mapStateToProps(state) {
+  let categories = Object.assign([], state.categories);
+  return {
+    categories: categories
+  }
+}
+
+export default connect(mapStateToProps, { getFacebookUser, getCategories })(App);
