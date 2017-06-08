@@ -3,19 +3,24 @@ import { connect } from 'react-redux';
 
 import { getFacebookUser } from '../actions/signin';
 import { getCategories } from '../actions/categories';
+import { setFetchCommons } from '../actions/commons';
 import Navbar from '../shared/navbar';
+import MainPage from './home/main';
 
 class App extends Component {
 
   componentWillMount() {
     this.props.getFacebookUser();
     this.props.getCategories();
+    this.props.setFetchCommons();
   }
 
   render() {
+    let { categories, commons } = this.props;
     return (
       <div>
-        <Navbar categories={this.props.categories}/>
+        <Navbar categories={categories} />
+        <MainPage commons={commons}/>
       </div>
     );
   }
@@ -24,8 +29,17 @@ class App extends Component {
 function mapStateToProps(state) {
   let categories = Object.assign([], state.categories);
   return {
-    categories: categories
+    categories: categories,
+    commons: state.commons
   }
 }
 
-export default connect(mapStateToProps, { getFacebookUser, getCategories })(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    getFacebookUser: () => dispatch(getFacebookUser()),
+    getCategories: () => dispatch(getCategories()),
+    setFetchCommons: () => dispatch(setFetchCommons())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
