@@ -146,11 +146,31 @@ class Navbar extends Component {
             </ul>
             <ul className="nav navbar-nav navbar-right rg_nav">
               <li><a href="#" className="satya"><i className='icon ion-ios-bell-outline'></i></a></li>
-              <li><a href="#" className="satya"><i className="icon ion-ios-heart-outline"></i></a></li>
+              {/*<li><a href="#" className="satya"><i className="icon ion-ios-heart-outline"></i></a></li> */}
               <li><a href="#" className="satya"><i className="icon ion-ios-browsers-outline"></i></a></li>
-              <li><a href="#" className="satya"><i className="icon ion-ios-box-outline"></i></a></li>
-              <li className="prf"><a href="#" className="satya"><span className="bg_profile"
-                style={{backgroundImage: 'url(/images/default/profile.png)'}}></span></a></li>
+              <li className="fgt"><a href="#" className="satya"><i className="icon ion-ios-box-outline"></i></a></li>
+              <li className="prf dropdown">
+                <a className="satya dropdown-toggle" data-toggle="dropdown">
+                  <span className="bg_profile"style={{backgroundImage: 'url(/images/default/profile.png)'}}></span>
+                </a>
+                <ul className="dropdown-menu list-unstyled dtrt_">
+                  <li className="profile_">
+                    <div className="pto">
+                      <span className="bg_profile_big"style={{backgroundImage: 'url(/images/default/profile.png)'}}></span>
+                    </div>
+                    <div className="txcs">
+                      <p className="greeting">What's Up..</p>
+                      <span className="name_d">scrambleeg</span>
+                    </div>
+                  </li>
+                  <li className="cvft"><a href="#">Open Shop</a></li>
+                  <li className="cvft"><a href="#">Purchase</a></li>
+                  <li className="cvft"><a href="#">Wishlists</a></li>
+                  <li className="cvft"><a href="#">Reviews</a></li>
+                  <li className="cvft"><a href="#">Setting</a></li>
+                  <li className="cvft lgt"><a href="#">Log Out</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
           <div className="container-fluid bottom">
