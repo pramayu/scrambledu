@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Purchased from './overview/purchased';
+import Collev from './overview/collev';
+import Compare from './overview/compare';
+import FavShop from './overview/favshop';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -42,7 +45,7 @@ class Dashboard extends Component {
                 </div>
                 <div className="non_seller vui">
                   <ul className="list-unstyled viu">
-                    <li><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span><a href="#">Dashboard</a></li>
+                    <li className="actives"><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span><a href="#">Dashboard</a></li>
                     <li><span className="cfe set"><span className="icon ion-ios-gear-outline"></span></span><a href="#">Setting Account</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-heart-outline"></span></span><a href="#">Collection</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-folder-outline"></span></span><a href="#">Purchase</a></li>
@@ -115,6 +118,20 @@ class Dashboard extends Component {
                 <div className="purchased">
                   <Purchased />
                 </div>
+                <div className="reviews">
+
+                </div>
+                <div className="collev">
+                  <Collev />
+                </div>
+                <div className="compare">
+                  <Compare />
+                </div>
+                <div className="profile"></div>
+                <div className="favshop">
+                  <FavShop />
+                </div>
+                <div className="clear"></div>
               </div>
             </div>
           </div>

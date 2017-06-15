@@ -631,6 +631,18 @@ body {
                 text-decoration: none;
               }
             }
+            .actives {
+              background-color: #f5f5f5;
+              &:before {
+                content: "";
+                position: absolute;
+                width: 4px;
+                height: 35px;
+                background-color: #31e4a3;
+                left: 0;
+                margin-top: -4px;
+              }
+            }
           }
         }
       }
@@ -710,58 +722,179 @@ body {
       }
       .content_dash {
         padding-top: 40px;
-        .purchased {
+        padding-bottom: 50px;
+        .overview_ {
           float: left;
-          width: 65%;
           height: 350px;
           background-color: #fff;
           border-radius: 2px;
           border: 1px solid #f4f4f4;
+        }
+        .begex {
+          padding: 0px 10px;
+          display: flex;
+          border-bottom: 1px solid #f4f4f4;
+          .title_ {
+            flex: 1;
+            padding: 10px 0px;
+            padding-top: 12px;
+            .pur {
+              font-size: 11px;
+              text-transform: uppercase;
+              margin: 0px;
+              font-weight: 500;
+              color: #b5b5b5;
+              text-decoration: none;
+            }
+          }
+          .icons {
+            flex: .1;
+            display: flex;
+            padding: 8px 0px;
+            .colap {
+              flex: 1;
+              text-align: right;
+              .sh {
+                text-decoration: none;
+                color: #b5b5b5;
+                .ion-chevron-down {
+                  font-size: 13px;
+                }
+              }
+            }
+            .showm {
+              flex: 1;
+              text-align: right;
+              .sh {
+                text-decoration: none;
+                color: #b5b5b5;
+                .ion-arrow-expand {
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+        }
+        .content_listx {
+          display: flex;
+          flex-direction: row;
+          .img_thumb {
+            flex: .15;
+            height: 37px;
+            padding-left: 10px;
+            padding-top: 3px;
+            .cftg {
+              background-position: center;
+              background-size: cover;
+              width: 30px;
+              height: 30px;
+              border-radius: 4px;
+            }
+            &:after {
+              content: "\F397";
+              font-family: 'Ionicons';
+              position: absolute;
+              margin-left: 45px;
+              margin-top: -27px;
+              font-size: 18px;
+              color: #b5b5b5;
+            }
+          }
+          .name_p {
+            flex: 1;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            .ajny {
+              font-size: 13px;
+              font-weight: 300;
+              color: #b5b5b5;
+            }
+          }
+          .dat {
+            flex: .3;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .jhy {
+              font-size: 13px;
+              font-weight: 300;
+              color: #b5b5b5;
+            }
+          }
+          .pric {
+            flex: .3;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 30px;
+            .jew {
+              font-size: 13px;
+              font-weight: 400;
+              color: #b5b5b5;
+            }
+          }
+        }
+        .purchased {
+          width: 70%;
+          @extend .overview_;
           .purchased_content {
             .bege {
-              padding: 0px 10px;
-              display: flex;
-              border-bottom: 1px solid #f4f4f4;
-              .title_ {
-                flex: 1;
-                padding: 10px 0px;
-                padding-top: 12px;
-                .pur {
-                  font-size: 11px;
-                  text-transform: uppercase;
-                  margin: 0px;
-                  font-weight: 500;
-                  color: #b5b5b5;
-                  text-decoration: none;
-                }
+              @extend .begex;
+            }
+            .content_list {
+              @extend .content_listx;
+            }
+          }
+        }
+        .reviews {
+          width: 28%;
+          @extend .overview_;
+          margin-left: 20px;
+          padding-top: 40px;
+        }
+        .collev {
+          @extend .overview_;
+          width: 49%;
+          margin-top: 20px;
+          .collev_content {
+            .bege {
+              @extend .begex;
+            }
+            .content_list {
+              @extend .content_listx;
+              .img_thumb {
+                flex: .19;
               }
-              .icons {
-                flex: .1;
-                display: flex;
-                padding: 8px 0px;
-                .colap {
-                  flex: 1;
-                  text-align: right;
-                  .sh {
-                    text-decoration: none;
-                    color: #b5b5b5;
-                    .ion-chevron-down {
-                      font-size: 13px;
-                    }
-                  }
-                }
-                .showm {
-                  flex: 1;
-                  text-align: right;
-                  .sh {
-                    text-decoration: none;
-                    color: #b5b5b5;
-                    .ion-arrow-expand {
-                      font-size: 16px;
-                    }
-                  }
-                }
-              }
+            }
+          }
+        }
+        .compare {
+          @extend .overview_;
+          width: 49%;
+          margin-top: 20px;
+          margin-left: 20px;
+          .compare_content {
+            .bege {
+              @extend .begex;
+            }
+          }
+        }
+        .profile {
+          width: 28%;
+          @extend .overview_;
+          margin-right: 20px;
+          margin-top: 20px;
+        }
+        .favshop {
+          width: 70%;
+          @extend .overview_;
+          margin-top: 20px;
+          .favshop_content {
+            .bege {
+              @extend .begex;
             }
           }
         }

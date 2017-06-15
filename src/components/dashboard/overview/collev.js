@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class Purchased extends Component {
+class Collev extends Component {
   render() {
     return (
-      <div className="purchased_content">
+      <div className="collev_content">
         <div className="bege">
           <div className="title_">
-            <p className="pur">Purchase</p>
+            <p className="pur">Collection</p>
           </div>
           <div className="icons">
             <div className="colap">
@@ -22,10 +22,7 @@ class Purchased extends Component {
             <div className="cftg" style={{backgroundImage: 'url(/images/dummy/products/humio.png)'}}></div>
           </div>
           <div className="name_p">
-            <span className="ajny">Latch board, Travel busy board, Toy for autism,  Toddler bu ...</span>
-          </div>
-          <div className="dat">
-            <span className="jhy">09/02/2017</span>
+            <span className="ajny">Latch board, Travel busy board, Toy for autism ...</span>
           </div>
           <div className="pric">
             <span className="jew">USD2000</span>
@@ -36,10 +33,7 @@ class Purchased extends Component {
             <div className="cftg" style={{backgroundImage: 'url(/images/dummy/products/xmasshot.jpg)'}}></div>
           </div>
           <div className="name_p">
-            <span className="ajny">Small Wooden Bow and Arrows Natural Children Toy Play Set ...</span>
-          </div>
-          <div className="dat">
-            <span className="jhy">09/02/2017</span>
+            <span className="ajny">Small Wooden Bow and Arrows Natural Children...</span>
           </div>
           <div className="pric">
             <span className="jew">USD500</span>
@@ -52,9 +46,6 @@ class Purchased extends Component {
           <div className="name_p">
             <span className="ajny">Nerf Hammershot 8-Shot Cylinder</span>
           </div>
-          <div className="dat">
-            <span className="jhy">10/02/2017</span>
-          </div>
           <div className="pric">
             <span className="jew">USD260</span>
           </div>
@@ -64,4 +55,4 @@ class Purchased extends Component {
   }
 }
 
-export default Purchased;
+export default Collev;
