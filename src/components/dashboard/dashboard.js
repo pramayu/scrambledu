@@ -45,7 +45,9 @@ class Dashboard extends Component {
                 </div>
                 <div className="non_seller vui">
                   <ul className="list-unstyled viu">
-                    <li className="actives"><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span><a href="#">Dashboard</a></li>
+                    <li className="actives"><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span>
+                      <a href="#">Dashboard</a>
+                    </li>
                     <li><span className="cfe set"><span className="icon ion-ios-gear-outline"></span></span><a href="#">Setting Account</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-heart-outline"></span></span><a href="#">Collection</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-folder-outline"></span></span><a href="#">Purchase</a></li>
