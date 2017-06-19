@@ -4,6 +4,8 @@ import SignupPg from '../components/signup/signup-pg';
 import SigninPg from '../components/signin/signin-pg';
 import UserVerify from '../components/userverify/userverify';
 import Dashboard from '../components/dashboard/dashboard';
+import DashChild from '../components/dashboard/children/dashchild';
+import UserSetting from '../components/dashboard/children/usersetting';
 
 module.exports = {
   path: '/',
@@ -13,8 +15,12 @@ module.exports = {
     { path: 'signin', component: SigninPg },
     { path: 'verify/user/:usertoken', component: UserVerify },
     {
-      path: 'user/:username',
-      component: Dashboard
+      path: 'user',
+      component: Dashboard,
+      childRoutes: [
+        { path: 'dashboard', component: DashChild },
+        { path: 'setting', component: UserSetting }
+      ]
     }
   ]
 };
