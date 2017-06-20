@@ -7,7 +7,7 @@ class DashNav extends Component {
       <div className="brop">
         <div className="nav_dash" id="top_n">
         <div className="left_sec">
-        <span className="hel">{ this.props.caption }!</span>
+        <span className="hel">{ this.props.caption }</span>
         <p className="wel">{ this.props.childcap }</p>
         </div>
         <div className="right_sec">

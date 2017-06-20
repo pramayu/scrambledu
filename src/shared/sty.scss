@@ -605,7 +605,7 @@ body {
         .vui {
           .viu {
             li {
-              padding: 4px 20px;
+              padding: 6px 20px;
               .cfe {
                 padding-right: 10px;
                 .icon {
@@ -637,10 +637,10 @@ body {
                 content: "";
                 position: absolute;
                 width: 4px;
-                height: 35px;
+                height: 39px;
                 background-color: #31e4a3;
                 left: 0;
-                margin-top: -4px;
+                margin-top: -6px;
               }
             }
           }
@@ -1109,6 +1109,52 @@ body {
     font-size: 9px;
     margin-top: -20px;
     color: #757575;
+  }
+}
+
+// user setting
+.user-setting {
+  background-color: #fff;
+  border: 1px solid #f4f4f4;
+  padding: 40px 60px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  .personal-info, .preferences, .adresses, .bank, .email {
+    padding-bottom: 30px;
+    .hed {
+      display: flex;
+      flex:1;
+      flex-direction: row;
+      align-items: center;
+      .tirl {
+        flex: .5;
+        display: flex;
+        justify-content: flex-start;
+        .teq {
+          font-size: 11px;
+          text-transform: uppercase;
+          font-weight: 500;
+          color: #b5b5b5;
+          text-decoration: none;
+        }
+      }
+      .clap {
+        flex: .5;
+        display: flex;
+        justify-content: flex-end;
+        .cage {
+          width: 20px;
+          height: 20px;
+          background-color: #f2f2f2;
+          border-radius: 100%;
+          text-align: center;
+          .icon {
+            font-size: 16px;
+            color: #fff;
+          }
+        }
+      }
+    }
   }
 }
 

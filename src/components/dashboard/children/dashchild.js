@@ -9,7 +9,7 @@ class DashChild extends Component {
   render() {
     return (
       <div>
-        <DashNav caption="Hello, Entis" childcap="Wellcome back to the Mizmart"/>
+        <DashNav caption="Hello, Entis!" childcap="Wellcome back to the Mizmart"/>
         <div className="content_dash">
         <div className="purchased">
         <Purchased />
