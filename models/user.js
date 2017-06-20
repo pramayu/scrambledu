@@ -47,9 +47,6 @@ var UserSchema = new mongoose.Schema({
   },
   google_token: {
     type: String
-  },
-  avatar: {
-    type: String
   }
 });
 

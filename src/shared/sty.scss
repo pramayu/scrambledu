@@ -11,6 +11,15 @@ body {
 
 @media(min-width: 768px) {
 
+.react-datepicker {
+  font-size: 12px;
+  font-weight: 400;
+  color: #d7d7d7 !important;
+  font-family: 'Roboto';
+}
+.react-datepicker__input-container {
+  display: block;
+}
 // shared
 .btn-log-sign {
   margin-bottom: 13px;
@@ -1151,6 +1160,226 @@ body {
           .icon {
             font-size: 16px;
             color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .personal-info {
+    .personal-content {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      padding-right: 10%;
+      .img_pro {
+        display: flex;
+        flex: .2;
+        justify-content: flex-start;
+        padding-top: 30px;
+        flex-direction: column;
+        .img_update {
+          width: 150px;
+          height: 150px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          border-radius: 3px;
+        }
+        .btn-profile {
+          text-transform: uppercase;
+          color: #fff;
+          background-color: #03A9F4;
+          padding: 6px 30px;
+          width: 97%;
+          font-size: 11px;
+          font-weight: 600;
+          margin-top: 10px;
+          outline: none;
+          box-shadow: none;
+          border: 1px solid #0092d4;
+        }
+      }
+      .form_pro {
+        display: flex;
+        padding-top: 30px;
+        flex: .8;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding-left: 50px;
+        .form-group {
+          label {
+            font-weight: 500;
+            color: #b5b5b5;
+            font-size: 11px;
+            text-transform: uppercase;
+          }
+          .form-control {
+            border-radius: 2px;
+            outline: none;
+            box-shadow: none;
+            color: #626262;
+            border-color: #d8d8d8;
+          }
+          .react-datepicker-ignore-onclickoutside, .react-datepicker__input-container {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            border-radius: 2px;
+            outline: none;
+            box-shadow: none;
+            border-color: #d8d8d8;
+          }
+          .react-datepicker__input-container {
+            input {
+              border: none;
+              outline: none;
+              // margin-top: 4px;
+              // height: 0px;
+              // margin-left: -10px;
+            }
+          }
+        }
+        .xfdt {
+          display: flex;
+          flex: 1;
+          flex-direction: row;
+          align-items: flex-start;
+          .bfhr, .lser {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          }
+          .lser {
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+  }
+  .adresses {
+    .afress {
+      padding-top: 30px;
+      .btn-new-adress {
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #03A9F4;
+        padding: 6px 35px;
+        font-size: 11px;
+        font-weight: 600;
+        margin-top: 10px;
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #0092d4;
+      }
+      .dheiuy {
+        padding-top: 40px;
+        .chft {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          flex: 1;
+          margin: 0px;
+          .name {
+            flex: .25;
+            display: flex;
+            padding: 9px 0px;
+            padding-left: 10px;
+            background-color: #cacee2;
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 600;
+            border-top-left-radius: 3px;
+            border-right: 1px solid #bbc1de;
+          }
+          .receiver {
+            flex: .25;
+            display: flex;
+            padding: 9px 0px;
+            padding-left: 10px;
+            background-color: #cacee2;
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 600;
+            border-left: 1px solid #d5d7e2;
+            border-right: 1px solid #bbc1de;
+          }
+          .phone {
+            flex: .25;
+            display: flex;
+            padding: 9px 0px;
+            padding-left: 10px;
+            background-color: #cacee2;
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 600;
+            border-left: 1px solid #d5d7e2;
+            border-right: 1px solid #bbc1de;
+          }
+          .adres {
+            flex: .6;
+            display: flex;
+            padding: 9px 0px;
+            padding-left: 10px;
+            background-color: #cacee2;
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 600;
+            border-left: 1px solid #d5d7e2;
+            border-right: 1px solid #bbc1de;
+          }
+          .action {
+            flex: .2;
+            display: flex;
+            padding: 9px 0px;
+            padding-left: 10px;
+            background-color: #cacee2;
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 600;
+            border-top-right-radius: 3px;
+            border-left: 1px solid #d5d7e2;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+          }
+        }
+        .cgyuo {
+          margin: 0px;
+          padding: 0px;
+          .name, .receiver, .phone, .adres {
+            background-color: transparent;
+            color: #9c9c9c;
+            border: none;
+            align-items: center;
+            height: 50px;
+            font-size: 12px;
+            font-weight: 400;
+            border-radius: 0px !important;
+          }
+          .action {
+            background-color: transparent;
+            color: #9c9c9c;
+            border: none;
+            border-radius: 0px !important;
+            height: 50px;
+            font-size: 12px;
+            .fa {
+              font-size: 14px;
+              margin: 0px 5px;
+            }
           }
         }
       }
