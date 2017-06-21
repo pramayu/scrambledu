@@ -90,6 +90,55 @@ class UserSetting extends Component {
                 </div>
               </div>
             </div>
+            <div className="pref">
+              <div className="language">
+                <p className="tileo">Language</p>
+                <div className="contr">
+                  <span className="dget">Choose your default language:</span>
+                  <div className="form-group">
+                    <select className="form-control">
+                      <option value="indonesia">Indonesia</option>
+                      <option value="english">English</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="notif">
+                <div className="language">
+                  <p className="tileo">notification</p>
+                  <div className="jtuy contr">
+                    <div className="form-group">
+                      <label>
+                        <p className="ney">Newsletter</p>
+                        <input type="checkbox" name="newletter"/>
+                        <span className="bstr"> Any promotions, tips & tricks and information updates</span>
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        <p className="ney">Reviews</p>
+                        <input type="checkbox" name="reviews"/>
+                        <span className="bstr"> Every Review and Comment I received</span>
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        <p className="ney">Feature Update</p>
+                        <input type="checkbox" name="reviews"/>
+                        <span className="bstr"> Notification of any new features or feature updates.</span>
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        <p className="ney">Security and Violations</p>
+                        <input type="checkbox" name="reviews"/>
+                        <span className="bstr"> Email notifications regarding security guides, login device notifications, account banned.</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="adresses">
             <div className="hed">
@@ -146,16 +195,26 @@ class UserSetting extends Component {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="email">
-            <div className="hed">
-              <div className="tirl">
-                <span className="teq">5.emails</span>
-              </div>
-              <div className="clap">
-                <div className="cage">
-                  <span className="icon ion-android-arrow-dropdown"></span>
-                </div>
+            <div className="afress">
+              <button className="btn btn-new-adress">ADD BANK ACCOUNT</button>
+              <div className="dheiuy">
+                <ul className="list-unstyled chft">
+                  <li className="name">OWNER</li>
+                  <li className="receiver">NUMBER</li>
+                  <li className="phone">BRANCH</li>
+                  <li className="adres">BANK NAME</li>
+                  <li className="action">ACTION</li>
+                </ul>
+                <ul className="list-unstyled chft cgyuo">
+                  <li className="name">Entis Sutisna</li>
+                  <li className="receiver">008801036884507</li>
+                  <li className="phone">Singaraja</li>
+                  <li className="adres">PT. BANK RAKYAT INDONESIA (PERSERO)</li>
+                  <li className="action">
+                    <span className="fa fa-pencil-square-o"></span>
+                    <span className="fa fa-trash-o"></span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

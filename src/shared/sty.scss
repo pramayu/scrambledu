@@ -1128,7 +1128,8 @@ body {
   padding: 40px 60px;
   padding-bottom: 10px;
   border-radius: 3px;
-  .personal-info, .preferences, .adresses, .bank, .email {
+  margin-bottom: 40px;
+  .personal-info, .preferences, .adresses, .bank {
     padding-bottom: 30px;
     .hed {
       display: flex;
@@ -1217,7 +1218,7 @@ body {
             border-radius: 2px;
             outline: none;
             box-shadow: none;
-            color: #626262;
+            color: #9c9c9c;
             border-color: #d8d8d8;
           }
           .react-datepicker-ignore-onclickoutside, .react-datepicker__input-container {
@@ -1227,7 +1228,7 @@ body {
             padding: 6px 12px;
             font-size: 14px;
             line-height: 1.42857143;
-            color: #555;
+            color: #9c9c9c;
             background-color: #fff;
             background-image: none;
             border: 1px solid #ccc;
@@ -1269,7 +1270,7 @@ body {
       }
     }
   }
-  .adresses {
+  .adresses, .bank {
     .afress {
       padding-top: 30px;
       .btn-new-adress {
@@ -1382,6 +1383,65 @@ body {
             }
           }
         }
+      }
+    }
+  }
+  .preferences {
+    .pref {
+      padding-top: 30px;
+      .language, .notif {
+        .tileo {
+          padding: 9px 0px;
+          background-color: #cacee2;
+          padding-left: 9px;
+          margin: 0px;
+          font-size: 11px;
+          color: #ffffff;
+          font-weight: 600;
+          border-top-left-radius: 3px;
+          border-right: 1px solid #bbc1de;
+          text-transform: uppercase;
+          border-top-right-radius: 3px;
+        }
+        .contr {
+          padding: 5px 20px;
+          background-color: #f9f9f9;
+          border: 1px solid #eaeaea;
+          border-top: none;
+          .dget {
+            font-size: 12px;
+            color: #b5b5b5;
+            font-weight: 500;
+          }
+          .form-group {
+            padding-top: 5px;
+            .form-control {
+              border-radius: 2px;
+              outline: none;
+              box-shadow: none;
+              color: #9c9c9c;
+              border-color: #d8d8d8;
+            }
+          }
+        }
+        .jtuy {
+          .form-group {
+            label {
+              .ney {
+                margin-bottom: 3px;
+                font-weight: 500;
+                color: #626262;
+              }
+              .bstr {
+                font-weight: 300;
+                color: #b5b5b5;
+              }
+            }
+          }
+        }
+      }
+      .notif {
+        margin-top: 20px;
       }
     }
   }
