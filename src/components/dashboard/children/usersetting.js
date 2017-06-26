@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import classnames from 'classnames';
 
 import DashNav from '../../../shared/dashboardnav';
 
@@ -10,7 +11,8 @@ class UserSetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment()
+      startDate: moment(),
+      active: '1'
     }
     this.birthChange = this.birthChange.bind(this)
   }
@@ -21,7 +23,14 @@ class UserSetting extends Component {
     })
   }
 
+  setCollapse(key) {
+    this.setState({
+      active: key
+    })
+  }
+
   render() {
+    console.log(this.state.active)
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
@@ -32,12 +41,13 @@ class UserSetting extends Component {
                 <span className="teq">1.personal information</span>
               </div>
               <div className="clap">
-                <div className="cage">
+                <div className={classnames('cage', {'norotate': '1' === this.state.active})} onClick={ this.setCollapse.bind(this, '1')}>
                   <span className="icon ion-android-arrow-dropdown"></span>
                 </div>
               </div>
             </div>
-            <div className="personal-content">
+            <div className={classnames('anhtry', {'showcollapse': '1' === this.state.active})}>
+              <div className="personal-content">
               <div className="img_pro">
                 <div className="img_update" style={{backgroundImage: 'url(/images/default/xd.jpg'}}></div>
                 <button className="btn btn-profile">SAVE</button>
@@ -78,6 +88,7 @@ class UserSetting extends Component {
                 </div>
               </div>
             </div>
+            </div>
           </div>
           <div className="preferences">
             <div className="hed">
@@ -85,12 +96,12 @@ class UserSetting extends Component {
                 <span className="teq">2.preferences</span>
               </div>
               <div className="clap">
-                <div className="cage">
+                <div className={classnames('cage', {'norotate': '2' === this.state.active})} onClick={ this.setCollapse.bind(this, '2')}>
                   <span className="icon ion-android-arrow-dropdown"></span>
                 </div>
               </div>
             </div>
-            <div className="pref">
+            <div className={classnames('pref', {'showcollapse': '2' === this.state.active})}>
               <div className="language">
                 <p className="tileo">Language</p>
                 <div className="contr">
@@ -146,12 +157,12 @@ class UserSetting extends Component {
                 <span className="teq">3.adresses</span>
               </div>
               <div className="clap">
-                <div className="cage">
+                <div className={classnames('cage', {'norotate': '3' === this.state.active})} onClick={ this.setCollapse.bind(this, '3')}>
                   <span className="icon ion-android-arrow-dropdown"></span>
                 </div>
               </div>
             </div>
-            <div className="afress">
+            <div className={classnames('afress', {'showcollapse': '3' === this.state.active})}>
               <button className="btn btn-new-adress">ADD ADDRESS</button>
               <div className="dheiuy">
                 <ul className="list-unstyled chft">
@@ -190,12 +201,12 @@ class UserSetting extends Component {
                 <span className="teq">4.bank accounts</span>
               </div>
               <div className="clap">
-                <div className="cage">
+                <div className={classnames('cage', {'norotate': '4' === this.state.active})} onClick={ this.setCollapse.bind(this, '4')}>
                   <span className="icon ion-android-arrow-dropdown"></span>
                 </div>
               </div>
             </div>
-            <div className="afress">
+            <div className={classnames('afress', {'showcollapse': '4' === this.state.active})}>
               <button className="btn btn-new-adress">ADD BANK ACCOUNT</button>
               <div className="dheiuy">
                 <ul className="list-unstyled chft">

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  // scrollTop
   $(window).scroll(function(event) {
     var scroll = $(window).scrollTop();
     if(scroll >= 80) {
@@ -8,5 +9,7 @@ $(document).ready(function() {
       $('#top_n').show()
       $('#bottom_n').removeClass('wtf');
     }
-  })
+  });
+
+  // collapse
 })

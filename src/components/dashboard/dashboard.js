@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: props.height
+      height: props.height,
+      active: '1'
     }
   }
   componentWillMount() {
     this.setState({ height: window.innerHeight })
   }
+
+  setCollapse(key) {
+    this.setState({
+      active: key
+    })
+  }
+
   render() {
     return (
       <div>
@@ -37,9 +46,11 @@ class Dashboard extends Component {
               </div>
               <div className="basic_info">
                 <div className="basic_">
-                  <p className="bi">PROFILE <span className="icon ion-arrow-down-b pull-right"></span></p>
+                  <p className="bi" onClick={this.setCollapse.bind(this, '1')}>PROFILE
+                    <span className={classnames('icon ion-arrow-down-b pull-right', {'jduet': '1' === this.state.active})}></span>
+                  </p>
                 </div>
-                <div className="non_seller vui">
+                <div className={classnames('non_seller vui', { 'dhetr': '1' === this.state.active})}>
                   <ul className="list-unstyled viu">
                     <li className="actives"><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span>
                       <a href="#">Dashboard</a>
@@ -53,9 +64,11 @@ class Dashboard extends Component {
                   </ul>
                 </div>
                 <div className="basic_">
-                  <p className="bi">SHOP <span className="icon ion-arrow-down-b pull-right"></span></p>
+                  <p className="bi" onClick={this.setCollapse.bind(this, '2')}>SHOP
+                    <span className={classnames('icon ion-arrow-down-b pull-right', {'jduet': '2' === this.state.active})}></span>
+                  </p>
                 </div>
-                <div className="non_seller vui">
+                <div className={classnames('non_seller vui', { 'dhetr': '2' === this.state.active})}>
                   <ul className="list-unstyled viu">
                     <li><span className="cfe"><span className="icon ion-ios-albums-outline"></span></span><a href="#">my shop</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-book-outline"></span></span><a href="#">Sell</a></li>

@@ -609,12 +609,24 @@ body {
             font-size: 11px;
             font-weight: bold;
             color: #b5b5b5;
+            cursor: pointer;
+            .jduet {
+              -webkit-transform: rotate(180deg);
+              -moz-transform: rotate(180deg);
+              transform: rotate(180deg);
+              color: #CDDC39 !important;
+            }
           }
         }
         .vui {
+          display: none;
           .viu {
             li {
               padding: 6px 20px;
+              display: flex;
+              flex: 1;
+              align-items: center;
+              justify-content: flex-start;
               .cfe {
                 padding-right: 10px;
                 .icon {
@@ -649,10 +661,13 @@ body {
                 height: 39px;
                 background-color: #31e4a3;
                 left: 0;
-                margin-top: -6px;
+                margin-top: 0px;
               }
             }
           }
+        }
+        .dhetr  {
+          display: block !important;
         }
       }
     }
@@ -1158,6 +1173,11 @@ body {
           background-color: #f2f2f2;
           border-radius: 100%;
           text-align: center;
+          background-color: rgba(3, 169, 244, .5);
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          transform: rotate(180deg);
+          border: 1px solid #03a9f4;
           .icon {
             font-size: 16px;
             color: #fff;
@@ -1167,104 +1187,110 @@ body {
     }
   }
   .personal-info {
-    .personal-content {
-      display: flex;
-      flex: 1;
-      flex-direction: row;
-      padding-right: 10%;
-      .img_pro {
+    .anhtry {
+      display: none;
+      -webkit-transition: all .5s ease-in-out;
+      -moz-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      .personal-content {
         display: flex;
-        flex: .2;
-        justify-content: flex-start;
-        padding-top: 30px;
-        flex-direction: column;
-        .img_update {
-          width: 150px;
-          height: 150px;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          border-radius: 3px;
-        }
-        .btn-profile {
-          text-transform: uppercase;
-          color: #fff;
-          background-color: #03A9F4;
-          padding: 6px 30px;
-          width: 97%;
-          font-size: 11px;
-          font-weight: 600;
-          margin-top: 10px;
-          outline: none;
-          box-shadow: none;
-          border: 1px solid #0092d4;
-        }
-      }
-      .form_pro {
-        display: flex;
-        padding-top: 30px;
-        flex: .8;
-        justify-content: flex-start;
-        flex-direction: column;
-        padding-left: 50px;
-        .form-group {
-          label {
-            font-weight: 500;
-            color: #b5b5b5;
-            font-size: 11px;
+        flex: 1;
+        flex-direction: row;
+        padding-right: 10%;
+        .img_pro {
+          display: flex;
+          flex: .2;
+          justify-content: flex-start;
+          padding-top: 30px;
+          flex-direction: column;
+          .img_update {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 3px;
+          }
+          .btn-profile {
             text-transform: uppercase;
-          }
-          .form-control {
-            border-radius: 2px;
+            color: #fff;
+            background-color: #03A9F4;
+            padding: 6px 30px;
+            width: 97%;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 10px;
             outline: none;
             box-shadow: none;
-            color: #9c9c9c;
-            border-color: #d8d8d8;
+            border: 1px solid #0092d4;
           }
-          .react-datepicker-ignore-onclickoutside, .react-datepicker__input-container {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #9c9c9c;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            border-radius: 2px;
-            outline: none;
-            box-shadow: none;
-            border-color: #d8d8d8;
-          }
-          .react-datepicker__input-container {
-            input {
-              border: none;
+        }
+        .form_pro {
+          display: flex;
+          padding-top: 30px;
+          flex: .8;
+          justify-content: flex-start;
+          flex-direction: column;
+          padding-left: 50px;
+          .form-group {
+            label {
+              font-weight: 500;
+              color: #b5b5b5;
+              font-size: 11px;
+              text-transform: uppercase;
+            }
+            .form-control {
+              border-radius: 2px;
               outline: none;
-              // margin-top: 4px;
-              // height: 0px;
-              // margin-left: -10px;
+              box-shadow: none;
+              color: #9c9c9c;
+              border-color: #d8d8d8;
+            }
+            .react-datepicker-ignore-onclickoutside, .react-datepicker__input-container {
+              display: block;
+              width: 100%;
+              height: 34px;
+              padding: 6px 12px;
+              font-size: 14px;
+              line-height: 1.42857143;
+              color: #9c9c9c;
+              background-color: #fff;
+              background-image: none;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+              box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+              -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+              -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+              transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+              border-radius: 2px;
+              outline: none;
+              box-shadow: none;
+              border-color: #d8d8d8;
+            }
+            .react-datepicker__input-container {
+              input {
+                border: none;
+                outline: none;
+                // margin-top: 4px;
+                // height: 0px;
+                // margin-left: -10px;
+              }
             }
           }
-        }
-        .xfdt {
-          display: flex;
-          flex: 1;
-          flex-direction: row;
-          align-items: flex-start;
-          .bfhr, .lser {
+          .xfdt {
             display: flex;
-            flex-direction: column;
             flex: 1;
-          }
-          .lser {
-            padding-left: 20px;
+            flex-direction: row;
+            align-items: flex-start;
+            .bfhr, .lser {
+              display: flex;
+              flex-direction: column;
+              flex: 1;
+            }
+            .lser {
+              padding-left: 20px;
+            }
           }
         }
       }
@@ -1273,6 +1299,10 @@ body {
   .adresses, .bank {
     .afress {
       padding-top: 30px;
+      display: none;
+      -webkit-transition: all .5s ease-in-out;
+      -moz-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
       .btn-new-adress {
         text-transform: uppercase;
         color: #fff;
@@ -1389,6 +1419,10 @@ body {
   .preferences {
     .pref {
       padding-top: 30px;
+      display: none;
+      -webkit-transition: all .5s ease-in-out;
+      -moz-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
       .language, .notif {
         .tileo {
           padding: 9px 0px;
@@ -1445,6 +1479,80 @@ body {
       }
     }
   }
+  .showcollapse {
+    display: block !important;
+  }
+  .norotate {
+    background-color: #CDDC39 !important;
+    -webkit-transform: rotate(0deg) !important;
+    -moz-transform: rotate(0deg) !important;
+    transform: rotate(0deg) !important;
+    border: 1px solid #a3af29 !important;
+  }
 }
 
+// Collection
+    .collex {
+      .grus {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .colect {
+          padding: 2.5px;
+          width: 260px;
+          .ajetw {
+            height: 250px;
+            background-color: #fff;
+            border-radius: 3px;
+            border: 1px solid #f5f5f5;
+            -webkit-box-shadow: 0px 0px 30px 1px rgba(0,0,0,0.03);
+            -moz-box-shadow: 0px 0px 30px 1px rgba(0,0,0,0.03);
+            box-shadow: 0px 0px 30px 1px rgba(0,0,0,0.03);
+            .imagert {
+              padding-top: 30px;
+              text-align: center;
+              .djr {
+                width: 100px;
+                height: 100px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0 auto;
+                border-radius: 100%;
+              }
+              .najrt {
+                padding-top: 10px;
+                font-weight: 500;
+                color: #626262;
+                margin-bottom: 5px;
+              }
+              .dqwpi {
+                display: flex;
+                flex: 1;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                padding-top: 30px;
+                .dhery, .djqo, .djqpi {
+                  flex: 1;
+                  display: flex;
+                  justify-content: center;
+                  border-top: 1px solid #f4f4f4;
+                  padding-top: 10px;
+                  padding-bottom: 14px;
+                  .icon {
+                    font-size: 20px;
+                  }
+                }
+                .djqo {
+                  border-left: 1px solid #f4f4f4;
+                  border-right: 1px solid #f4f4f4;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 }

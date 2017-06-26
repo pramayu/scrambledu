@@ -6,6 +6,7 @@ import UserVerify from '../components/userverify/userverify';
 import Dashboard from '../components/dashboard/dashboard';
 import DashChild from '../components/dashboard/children/dashchild';
 import UserSetting from '../components/dashboard/children/usersetting';
+import Collection from '../components/dashboard/children/collection';
 
 module.exports = {
   path: '/',
@@ -19,7 +20,8 @@ module.exports = {
       component: Dashboard,
       childRoutes: [
         { path: 'dashboard', component: DashChild },
-        { path: 'setting', component: UserSetting }
+        { path: 'setting', component: UserSetting },
+        { path: 'collection', component: Collection }
       ]
     }
   ]
