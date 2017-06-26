@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -52,15 +53,27 @@ class Dashboard extends Component {
                 </div>
                 <div className={classnames('non_seller vui', { 'dhetr': '1' === this.state.active})}>
                   <ul className="list-unstyled viu">
-                    <li className="actives"><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span>
-                      <a href="#">Dashboard</a>
+                    <li><span className="cfe sped"><span className="icon ion-ios-speedometer-outline"></span></span>
+                      <Link to="/user/dashboard" activeClassName="actives">Dashboard</Link>
                     </li>
-                    <li><span className="cfe set"><span className="icon ion-ios-gear-outline"></span></span><a href="#">Setting Account</a></li>
-                    <li><span className="cfe"><span className="icon ion-ios-heart-outline"></span></span><a href="#">Collection</a></li>
-                    <li><span className="cfe"><span className="icon ion-ios-folder-outline"></span></span><a href="#">Purchase</a></li>
-                    <li><span className="cfe marks"><span className="icon ion-ios-bookmarks-outline"></span></span><a href="#">Reviews</a></li>
-                    <li><span className="cfe comp"><span className="icon ion-ios-browsers-outline"></span></span><a href="#">Compare</a></li>
-                    <li><span className="cfe brief"><span className="icon ion-ios-briefcase-outline"></span></span><a href="#">Favorite Shop</a></li>
+                    <li><span className="cfe set"><span className="icon ion-ios-gear-outline"></span></span>
+                      <Link to="/user/setting" activeClassName="actives">Setting Account</Link>
+                    </li>
+                    <li><span className="cfe"><span className="icon ion-ios-heart-outline"></span></span>
+                      <Link to="/user/collection" activeClassName="actives">Collection</Link>
+                    </li>
+                    <li><span className="cfe"><span className="icon ion-ios-folder-outline"></span></span>
+                      <a href="">Purchase</a>
+                    </li>
+                    <li><span className="cfe marks"><span className="icon ion-ios-bookmarks-outline"></span></span>
+                      <Link to="/user/review-product" activeClassName="actives">Reviews</Link>
+                    </li>
+                    <li><span className="cfe comp"><span className="icon ion-ios-browsers-outline"></span></span>
+                      <Link to="/user/compares" activeClassName="actives">Compare</Link>
+                    </li>
+                    <li><span className="cfe brief"><span className="icon ion-ios-briefcase-outline"></span></span>
+                      <Link to="/user/favorites" activeClassName="actives">Favorite Shop</Link>
+                    </li>
                   </ul>
                 </div>
                 <div className="basic_">

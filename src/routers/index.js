@@ -7,6 +7,9 @@ import Dashboard from '../components/dashboard/dashboard';
 import DashChild from '../components/dashboard/children/dashchild';
 import UserSetting from '../components/dashboard/children/usersetting';
 import Collection from '../components/dashboard/children/collection';
+import Reviews from '../components/dashboard/children/reviews';
+import Compare from '../components/dashboard/children/compare';
+import Favorite from '../components/dashboard/children/favshop';
 
 module.exports = {
   path: '/',
@@ -21,7 +24,10 @@ module.exports = {
       childRoutes: [
         { path: 'dashboard', component: DashChild },
         { path: 'setting', component: UserSetting },
-        { path: 'collection', component: Collection }
+        { path: 'collection', component: Collection },
+        { path: 'review-product', component: Reviews },
+        { path: 'compares', component: Compare },
+        { path: 'favorites', component: Favorite }
       ]
     }
   ]
