@@ -4,10 +4,12 @@ import user from './user';
 import cuser from './cuser';
 import categories from './categories';
 import commons from './common'
+import accounts from './account';
 
 export default combineReducers({
   user,
   cuser,
   categories,
-  commons
+  commons,
+  accounts
 });

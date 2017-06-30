@@ -22,6 +22,7 @@ var signin = require('./routers/signin');
 var userverify = require('./routers/verify_user');
 var category = require('./routers/categories');
 var common = require('./routers/commons');
+var account = require('./routers/accounts');
 
 var app = express();
 var compile = webpack(webpackConfig);
@@ -61,6 +62,7 @@ app.use(function(req, res, next){
   next();
 });
 
+app.use('/sliquo2i4o3r23oufrg38', account);
 app.use('/commons', common);
 app.use('/categories', category);
 app.use('/verify', userverify);

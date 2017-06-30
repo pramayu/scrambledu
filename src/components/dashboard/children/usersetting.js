@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 
 import DashNav from '../../../shared/dashboardnav';
+import { setFetchAccount } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -12,15 +14,63 @@ class UserSetting extends Component {
     super(props);
     this.state = {
       startDate: moment(),
-      active: '1'
+      active: '1',
+      firstname: '',
+      lastname: '',
+      username: '',
+      email: '',
+      birthday: '',
+      gender: '',
+      phone: '',
+      avatar: '',
+      newsletter: false,
+      reviews: false,
+      feature: false,
+      security: false,
+      language: '',
+      errors: {}
     }
     this.birthChange = this.birthChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentWillMount() {
+    this.props.setFetchAccount(this.props.current_user.user._id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      firstname: nextProps.setting.accounts.firstname ? nextProps.setting.accounts.firstname : '',
+      lastname: nextProps.setting.accounts.lastname ? nextProps.setting.accounts.lastname : '',
+      username: nextProps.setting.accounts.username ? nextProps.setting.accounts.username : '',
+      email: nextProps.setting.accounts.email ? nextProps.setting.accounts.email : '',
+      birthday: nextProps.setting.accounts.birthday ? nextProps.setting.accounts.birthday : '',
+      gender: nextProps.setting.accounts.gender ? nextProps.setting.accounts.gender : '',
+      phone: nextProps.setting.accounts.phone ? nextProps.setting.accounts.phone : '',
+      avatar: nextProps.setting.accounts.avatar ? nextProps.setting.accounts.avatar : '',
+      startDate: moment(nextProps.setting.accounts.birthday)
+    })
   }
 
   birthChange(date) {
     this.setState({
       startDate: date
     })
+  }
+
+  handleChange(e) {
+    if(!!this.state.errors[e.target.name]) {
+      let errors = Object.assign({}, this.state.errors);
+      delete errors[e.target.name]
+      this.setState({
+        [e.target.name]: e.target.value,
+        errors
+      })
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
   }
 
   setCollapse(key) {
@@ -30,7 +80,6 @@ class UserSetting extends Component {
   }
 
   render() {
-    console.log(this.state.active)
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
@@ -48,45 +97,54 @@ class UserSetting extends Component {
             </div>
             <div className={classnames('anhtry', {'showcollapse': '1' === this.state.active})}>
               <div className="personal-content">
-              <div className="img_pro">
-                <div className="img_update" style={{backgroundImage: 'url(/images/default/xd.jpg'}}></div>
-                <button className="btn btn-profile">SAVE</button>
-              </div>
-              <div className="form_pro">
+                <form className="frm_setting">
+                  <div className="img_pro">
+                    <div className="img_update" style={{backgroundImage: 'url(/images/default/xd.jpg'}}></div>
+                    <input type="hidden" name="avatar" value={this.state.avatar} onChange={this.handleChange}/>
+                    <button className="btn btn-profile">SAVE</button>
+                  </div>
+                  <div className="form_pro">
                 <div className="form-group xfdt">
                   <div className="bfhr">
                     <label>firstname</label>
-                    <input type="text" className="form-control"/>
+                    <input type="text" className="form-control" name="firstname"
+                      value={this.state.firstname} onChange={this.handleChange}/>
                   </div>
                   <div className="lser">
                     <label>lastname</label>
-                    <input type="text" className="form-control"/>
+                    <input type="text" className="form-control" name="lastname"
+                      value={this.state.lastname} onChange={this.handleChange}/>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="">username</label>
-                  <input type="text" className="form-control"/>
+                  <input type="text" className="form-control" name="username"
+                    value={this.state.username} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="">email</label>
-                  <input type="email" className="form-control"/>
+                  <input type="email" className="form-control" name="email"
+                    value={this.state.email} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="">birthday</label>
-                  <DatePicker selected={this.state.startDate} onChange={this.birthChange} />
+                  <DatePicker selected={this.state.startDate} onChange={this.birthChange} name="birthday"/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="">gender</label>
-                  <select className="form-control">
+                  <select className="form-control" name="gender"
+                    value={this.state.gender} onChange={this.handleChange}>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="">mobile phone</label>
-                  <input type="text" className="form-control"/>
-                </div>
+                    <label htmlFor="">mobile phone</label>
+                    <input type="text" className="form-control" name="phone"
+                      value={this.state.phone} onChange={this.handleChange}/>
+                  </div>
               </div>
+                </form>
             </div>
             </div>
           </div>
@@ -235,4 +293,17 @@ class UserSetting extends Component {
   }
 }
 
-export default UserSetting;
+function mapStateToProps(state) {
+  return {
+    setting: state.accounts,
+    current_user: state.cuser
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setFetchAccount: (id) => dispatch(setFetchAccount(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserSetting);
