@@ -19,10 +19,10 @@ export default (state = getInitialState, action={}) => {
         isFetching: false
       }
     case GET_ACCOUNT_FAILURE:
-    return {
-      accounts: [],
-      error: true
-    }
+      return {
+        accounts: [],
+        error: true
+      }
     default:
       return state;
   }

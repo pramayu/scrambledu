@@ -12,6 +12,7 @@ var router = express.Router();
 import { addUserValidate } from '../validate/signup';
 
 var users = require('../models/user');
+var prefrence = require('../models/prefrence');
 var config = require('../config/main');
 
 
@@ -64,6 +65,7 @@ router.post('/81abc52ad7185eac7c92', (req, res, next) => {
           if(err) {
             console.log(err);
           }
+
           var emailOpts = {
             from: '"scrambledu" <clientservices@scrambledu.com>',
             to: user.email,
@@ -76,6 +78,14 @@ router.post('/81abc52ad7185eac7c92', (req, res, next) => {
             }
           });
           done(null, user);
+        })
+      },
+      function prefUser(user, done) {
+        var pref = new prefrence({
+          'user': user._id
+        });
+        pref.save((err, pref) => {
+          done(null, user)
         })
       }
     ], (err, user) => {

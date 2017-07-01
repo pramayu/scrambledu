@@ -47,6 +47,12 @@ var UserSchema = new mongoose.Schema({
   },
   google_token: {
     type: String
+  },
+  birthday: {
+    type: String
+  },
+  phone: {
+    type: String
   }
 });
 

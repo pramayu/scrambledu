@@ -5,7 +5,12 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 import DashNav from '../../../shared/dashboardnav';
-import { setFetchAccount } from '../../../actions/accounts';
+import {
+  setFetchAccount,
+  editUserAccount,
+  editUserPrefrences,
+  getUserPreferences } from '../../../actions/accounts';
+import { settingUser } from '../../../../validate/setting';
 
 
 class UserSetting extends Component {
@@ -23,19 +28,23 @@ class UserSetting extends Component {
       gender: '',
       phone: '',
       avatar: '',
-      newsletter: false,
-      reviews: false,
-      feature: false,
-      security: false,
-      language: '',
-      errors: {}
+      newsletter: '',
+      reviews: '',
+      feature: '',
+      security: '',
+      languages: '',
+      errors: {},
+      isLoading: false
     }
     this.birthChange = this.birthChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.userSubmit = this.userSubmit.bind(this)
+    this.preferenceChange = this.preferenceChange.bind(this)
   }
 
   componentWillMount() {
     this.props.setFetchAccount(this.props.current_user.user._id)
+    this.props.getUserPreferences(this.props.current_user.user._id)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,13 +57,27 @@ class UserSetting extends Component {
       gender: nextProps.setting.accounts.gender ? nextProps.setting.accounts.gender : '',
       phone: nextProps.setting.accounts.phone ? nextProps.setting.accounts.phone : '',
       avatar: nextProps.setting.accounts.avatar ? nextProps.setting.accounts.avatar : '',
-      startDate: moment(nextProps.setting.accounts.birthday)
+      startDate: moment(nextProps.setting.accounts.birthday),
+      newsletter: nextProps.preferences.preferences.newsletter ? nextProps.preferences.preferences.newsletter : '',
+      reviews: nextProps.preferences.preferences.reviews ? nextProps.preferences.preferences.reviews : '',
+      feature: nextProps.preferences.preferences.feature ? nextProps.preferences.preferences.feature : '',
+      security: nextProps.preferences.preferences.security ? nextProps.preferences.preferences.security : '',
+      languages: nextProps.preferences.preferences.languages ? nextProps.preferences.preferences.languages : ''
     })
+  }
+
+  isValid() {
+    let { errors, isValid } = settingUser(this.state);
+    if(!isValid) {
+      this.setState({ errors })
+    }
+    return isValid
   }
 
   birthChange(date) {
     this.setState({
-      startDate: date
+      startDate: date,
+      birthday: date._d
     })
   }
 
@@ -79,11 +102,44 @@ class UserSetting extends Component {
     })
   }
 
+  userSubmit(e) {
+    e.preventDefault()
+    this.setState({
+      isLoading: true
+    })
+    if(this.isValid()) {
+      this.setState({ errors: {} })
+    }
+    let that = this;
+    this.props.editUserAccount(this.state, this.props.current_user.user._id).then(() => {
+      setTimeout(function () {
+        that.setState({
+          isLoading: false
+        })
+      }, 3000);
+    })
+  }
+
+  preferenceChange(e) {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    this.setState({
+      [e.target.name]: value
+    })
+    let setting = {
+      [e.target.name]: value
+    }
+    this.props.editUserPrefrences(setting, this.props.current_user.user._id)
+  }
+
   render() {
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
         <div className="user-setting">
+          <div className={classnames('update-info', {'update-info-hover': this.state.isLoading === true})}>
+            <span className="djwty">Congratulations</span>
+            <p className="twre">Update Success</p>
+          </div>
           <div className="personal-info">
             <div className="hed">
               <div className="tirl">
@@ -97,7 +153,7 @@ class UserSetting extends Component {
             </div>
             <div className={classnames('anhtry', {'showcollapse': '1' === this.state.active})}>
               <div className="personal-content">
-                <form className="frm_setting">
+                <form className="frm_setting" onSubmit={this.userSubmit}>
                   <div className="img_pro">
                     <div className="img_update" style={{backgroundImage: 'url(/images/default/xd.jpg'}}></div>
                     <input type="hidden" name="avatar" value={this.state.avatar} onChange={this.handleChange}/>
@@ -165,7 +221,7 @@ class UserSetting extends Component {
                 <div className="contr">
                   <span className="dget">Choose your default language:</span>
                   <div className="form-group">
-                    <select className="form-control">
+                    <select className="form-control" value={this.state.languages} name="languages" onChange={this.preferenceChange}>
                       <option value="indonesia">Indonesia</option>
                       <option value="english">English</option>
                     </select>
@@ -179,28 +235,28 @@ class UserSetting extends Component {
                     <div className="form-group">
                       <label>
                         <p className="ney">Newsletter</p>
-                        <input type="checkbox" name="newletter"/>
+                        <input type="checkbox" name="newsletter" checked={this.state.newsletter} onChange={this.preferenceChange}/>
                         <span className="bstr"> Any promotions, tips & tricks and information updates</span>
                       </label>
                     </div>
                     <div className="form-group">
                       <label>
                         <p className="ney">Reviews</p>
-                        <input type="checkbox" name="reviews"/>
+                        <input type="checkbox" name="reviews" checked={this.state.reviews} onChange={this.preferenceChange}/>
                         <span className="bstr"> Every Review and Comment I received</span>
                       </label>
                     </div>
                     <div className="form-group">
                       <label>
                         <p className="ney">Feature Update</p>
-                        <input type="checkbox" name="reviews"/>
+                        <input type="checkbox" name="feature" checked={this.state.feature} onChange={this.preferenceChange}/>
                         <span className="bstr"> Notification of any new features or feature updates.</span>
                       </label>
                     </div>
                     <div className="form-group">
                       <label>
                         <p className="ney">Security and Violations</p>
-                        <input type="checkbox" name="reviews"/>
+                        <input type="checkbox" name="security" checked={this.state.security} onChange={this.preferenceChange}/>
                         <span className="bstr"> Email notifications regarding security guides, login device notifications, account banned.</span>
                       </label>
                     </div>
@@ -296,13 +352,17 @@ class UserSetting extends Component {
 function mapStateToProps(state) {
   return {
     setting: state.accounts,
-    current_user: state.cuser
+    current_user: state.cuser,
+    preferences: state.preferences
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setFetchAccount: (id) => dispatch(setFetchAccount(id))
+    setFetchAccount: (id) => dispatch(setFetchAccount(id)),
+    editUserAccount: (data, id) => dispatch(editUserAccount(data, id)),
+    editUserPrefrences: (data, id) => dispatch(editUserPrefrences(data, id)),
+    getUserPreferences: (id) => dispatch(getUserPreferences(id))
   }
 }
 
