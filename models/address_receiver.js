@@ -1,25 +1,25 @@
 var mongoose = require('mongoose');
 var AddReceiveSchema = new mongoose.Schema({
   identifier: {
-    type: String, require: true
+    type: String, require: true, lowercase: true
   },
   receiver: {
-    type: String, require: true
+    type: String, require: true, lowercase: true
   },
   phone: {
-    type: String, require: true
+    type: String, require: true, lowercase: true
   },
   address: {
-    type: String, require: true
+    type: String, require: true, lowercase: true
   },
   province: {
-    type: String, require: true
+    type: mongoose.Schema.Types.ObjectId, ref: 'provinces'
   },
   regency: {
-    type: String, require: true
+    type: mongoose.Schema.Types.ObjectId, ref: 'regencies'
   },
   subdistrict: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId, ref: 'districts'
   }
 })
 

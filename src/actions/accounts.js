@@ -4,6 +4,9 @@ export let GET_ACCOUNT = 'GET_ACCOUNT';
 export let GET_ACCOUNT_SUCCESS = 'GET_ACCOUNT_SUCCESS';
 export let GET_ACCOUNT_FAILURE = 'GET_ACCOUNT_FAILURE';
 export let GET_USER_PREPERENCES = 'GET_USER_PREPERENCES';
+export let SET_PROVINCE = 'SET_PROVINCE';
+export let SET_REGENCY = 'SET_REGENCY';
+export let SET_DISTRICT = 'SET_DISTRICT';
 
 export function getAccount() {
   return {
@@ -32,6 +35,27 @@ export function setUserPreperences(preferences) {
   }
 }
 
+export function setProvince(provinces) {
+  return {
+    type: SET_PROVINCE,
+    provinces
+  }
+}
+
+export function setRegency(regencies) {
+  return {
+    type: SET_REGENCY,
+    regencies
+  }
+}
+
+export function setDistrict(districts) {
+  return {
+    type: SET_DISTRICT,
+    districts
+  }
+}
+
 export function setFetchAccount(id) {
   return dispatch => {
     dispatch(getAccount())
@@ -54,8 +78,6 @@ export function editUserAccount(data, id) {
   }
 }
 
-
-
 export function editUserPrefrences(data, id) {
   return dispatch => {
     return axios({
@@ -73,5 +95,26 @@ export function getUserPreferences(id) {
   return dispatch => {
     return axios.get(`/sliquo2i4o3r23oufrg38/dlqh4o23rh0389rh2/${id}/kfj30r93f30d308ihd`)
       .then((res) => dispatch(setUserPreperences(res.data.preferences)))
+  }
+}
+
+export function getProvince() {
+  return dispatch => {
+    return axios.get('/sliquo2i4o3r23oufrg38/f3r9fh938hf98dhw8d/s092d0jdwqijwdih/doi3e938djowd')
+      .then((res) => { dispatch(setProvince(res.data.province)) })
+  }
+}
+
+export function getRegency(id) {
+  return dispatch => {
+    return axios.get(`/sliquo2i4o3r23oufrg38/dj938hd938hd938fded/d398y93fhiuwefh398y/${id}/d83hq0ifdw`)
+      .then((res) => { dispatch(setRegency(res.data.regency)) })
+  }
+}
+
+export function getDistrict(id) {
+  return dispatch => {
+    return axios.get(`/sliquo2i4o3r23oufrg38/d903pdijwedoj3rh0hf0/do30wfhe0ifh3yr48/${id}/nfpa3847gfdjf93`)
+      .then((res) => { dispatch(setDistrict(res.data.district)) })
   }
 }

@@ -6,6 +6,9 @@ import categories from './categories';
 import commons from './common'
 import accounts from './account';
 import preferences from './preference';
+import provinces from './province';
+import regencies from './regency';
+import districts from './district';
 
 export default combineReducers({
   user,
@@ -13,5 +16,8 @@ export default combineReducers({
   categories,
   commons,
   accounts,
-  preferences
+  preferences,
+  provinces,
+  regencies,
+  districts
 });

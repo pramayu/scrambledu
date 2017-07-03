@@ -2,6 +2,9 @@ var express = require('express');
 var _ = require('lodash');
 var user = require('../models/user');
 var prefrence = require('../models/prefrence');
+var province = require('../models/province');
+var regency = require('../models/regency');
+var district = require('../models/district');
 var router = express.Router();
 
 router.get('/5872c4ec0e00167ab362/:id/8714c9ac5782c5eb63b5', (req, res, next) => {
@@ -70,6 +73,26 @@ router.get('/dlqh4o23rh0389rh2/:id/kfj30r93f30d308ihd', (req, res, next) => {
     } else {
       res.json({ error: 'User not found'})
     }
+  })
+})
+
+router.get('/f3r9fh938hf98dhw8d/s092d0jdwqijwdih/doi3e938djowd', (req, res, next) => {
+  province.find({}, (err, province) => {
+    res.json({ province })
+  })
+})
+
+router.get('/dj938hd938hd938fded/d398y93fhiuwefh398y/:id/d83hq0ifdw', (req, res, next) => {
+  var prov_id = parseInt(req.params.id);
+  regency.find({'prov': prov_id}, (err, regency) => {
+    res.json({ regency })
+  })
+})
+
+router.get('/d903pdijwedoj3rh0hf0/do30wfhe0ifh3yr48/:id/nfpa3847gfdjf93', (req, res, next) => {
+  var regency = parseInt(req.params.id);
+  district.find({'regency': regency}, (err, district) => {
+    res.json({ district })
   })
 })
 

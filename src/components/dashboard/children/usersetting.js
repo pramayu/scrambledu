@@ -9,8 +9,12 @@ import {
   setFetchAccount,
   editUserAccount,
   editUserPrefrences,
-  getUserPreferences } from '../../../actions/accounts';
+  getUserPreferences,
+  getProvince,
+  getRegency,
+  getDistrict } from '../../../actions/accounts';
 import { settingUser } from '../../../../validate/setting';
+import ModalAddress from './modal_address';
 
 
 class UserSetting extends Component {
@@ -45,6 +49,7 @@ class UserSetting extends Component {
   componentWillMount() {
     this.props.setFetchAccount(this.props.current_user.user._id)
     this.props.getUserPreferences(this.props.current_user.user._id)
+    this.props.getProvince()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -277,7 +282,7 @@ class UserSetting extends Component {
               </div>
             </div>
             <div className={classnames('afress', {'showcollapse': '3' === this.state.active})}>
-              <button className="btn btn-new-adress">ADD ADDRESS</button>
+              <button className="btn btn-new-adress" data-toggle="modal" data-target="#myModal">ADD ADDRESS</button>
               <div className="dheiuy">
                 <ul className="list-unstyled chft">
                   <li className="name">IDENTIFIER</li>
@@ -344,6 +349,9 @@ class UserSetting extends Component {
             </div>
           </div>
         </div>
+        <ModalAddress provinces = { this.props.provinces } regencies = { this.props.regencies }
+          districts = { this.props.districts } getRegency = { this.props.getRegency }
+          getDistrict = { this.props.getDistrict }/>
       </div>
     )
   }
@@ -353,7 +361,10 @@ function mapStateToProps(state) {
   return {
     setting: state.accounts,
     current_user: state.cuser,
-    preferences: state.preferences
+    preferences: state.preferences,
+    provinces: state.provinces,
+    regencies: state.regencies,
+    districts: state.districts
   }
 }
 
@@ -362,7 +373,10 @@ function mapDispatchToProps(dispatch) {
     setFetchAccount: (id) => dispatch(setFetchAccount(id)),
     editUserAccount: (data, id) => dispatch(editUserAccount(data, id)),
     editUserPrefrences: (data, id) => dispatch(editUserPrefrences(data, id)),
-    getUserPreferences: (id) => dispatch(getUserPreferences(id))
+    getUserPreferences: (id) => dispatch(getUserPreferences(id)),
+    getProvince: () => dispatch(getProvince()),
+    getRegency: (id) => dispatch(getRegency(id)),
+    getDistrict: (id) => dispatch(getDistrict(id))
   }
 }
 

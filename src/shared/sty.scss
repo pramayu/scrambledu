@@ -1254,6 +1254,7 @@ body {
               box-shadow: none;
               color: #9c9c9c;
               border-color: #d8d8d8;
+              font-size: 12px;
             }
             .react-datepicker-ignore-onclickoutside, .react-datepicker__input-container {
               display: block;
@@ -1545,7 +1546,7 @@ body {
 }
 
 // Collection
-    .collex , .reviwq, .comparex, .favorie{
+.collex , .reviwq, .comparex, .favorie{
       .grus {
         display: flex;
         flex: 1;
@@ -1620,4 +1621,83 @@ body {
         }
       }
     }
+
+.kor {
+  background-color: rgba(0,0,0,.5);
+  .modal-dialog {
+    width: 540px;
+    .modal-content {
+      border-radius: 3px;
+      .modal-header {
+        .close {
+          width: 20px;
+          height: 20px;
+          outline: none;
+          border-radius: 100%;
+          background-color: #cacaca;
+          font-size: 15px;
+          border: 1px solid #626262;
+          margin-top: 2px !important;
+        }
+        .modal-title {
+          font-weight: 300;
+          color: #626262;
+        }
+      }
+      .modal-body {
+        background-color: #f2f2f2;
+        .body-content {
+          .form-add {
+            .prov {
+              padding-left: 0px;
+            }
+            .rege {
+              padding: 0px;
+            }
+            .dist {
+              padding-right: 0px;
+            }
+            .form-group {
+              span {
+                font-size: 11px;
+                text-transform: uppercase;
+                font-weight: 500;
+                color: #b5b5b5;
+                text-decoration: none;
+              }
+              .rvi {
+                .form-control {
+                  box-shadow: none;
+                  outline: none;
+                  height: 40px;
+                  border: 1px solid #e0e0e0;
+                  color: #9c9c9c;
+                  text-transform: capitalize;
+                  font-size: 12px;
+                }
+                .posy {
+                  height: 60px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border: none;
+        background-color: #f2f2f2;
+        .bry {
+          background-color: #CDDC39 !important;
+          border: 1px solid #a3af29 !important;
+          color: #fff;
+          font-weight: 700;
+          font-size: 12px;
+          padding: 5px 30px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
 }
