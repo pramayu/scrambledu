@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var RegencySchema = new mongoose.Schema({
-  code: {
+  _id: {
     type: Number, require: true
   },
   prov: {

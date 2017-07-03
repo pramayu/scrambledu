@@ -21,7 +21,7 @@ class ModalAddress extends Component {
     let thisProvs = (
       this.props.provinces.provinces.map((prop, id) => {
         return (
-          <option key={id} value={prop.code}>{ prop.name.slice(0).toLowerCase() }</option>
+          <option key={id} value={prop._id}>{ prop.name.slice(0).toLowerCase() }</option>
         )
       })
     )
@@ -29,7 +29,7 @@ class ModalAddress extends Component {
     let thisRegency = (
       this.props.regencies.regencies.map((reg, id) => {
         return (
-          <option key={id} value={reg.code}>{ reg.name.slice(0).toLowerCase() }</option>
+          <option key={id} value={reg._id}>{ reg.name.slice(0).toLowerCase() }</option>
         )
       })
     )
@@ -37,7 +37,7 @@ class ModalAddress extends Component {
     let thisDistrict = (
       this.props.districts.districts.map((dist, id) => {
         return (
-          <option key={id} value={dist.code}>{ dist.name.slice(0).toLowerCase() }</option>
+          <option key={id} value={dist._id}>{ dist.name.slice(0).toLowerCase() }</option>
         )
       })
     )

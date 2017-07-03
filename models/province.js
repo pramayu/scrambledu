@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var ProvinceSchema = new mongoose.Schema({
-  code: {
+  _id: {
     type: Number, require: true
   },
   name: {
