@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 
+import { addressReceiver } from '../../../../validate/address';
+
 class ModalAddress extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      identifier: '',
+      receiver: '',
+      phone: '',
+      province: 0,
+      regency: 0,
+      district: 0,
+      address: '',
+      zipcode: '',
+      errors: {}
+    }
     this.getRegencyChange = this.getRegencyChange.bind(this)
     this.getDistrictChange = this.getDistrictChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   getRegencyChange(e) {
@@ -14,6 +29,37 @@ class ModalAddress extends Component {
 
   getDistrictChange(e) {
     this.props.getDistrict(e.target.value)
+  }
+
+  isValid() {
+    let { errors, isValid } = addressReceiver(this.state)
+    if(!isValid) {
+      this.setState({ errors })
+    }
+    return isValid
+  }
+
+  handleChange(e) {
+    if(!!this.state.errors[e.target.name]) {
+      let errors = Object.assign({}, this.state.errors);
+      delete errors[e.target.name]
+      this.setState({
+        [e.target.name]: e.target.value,
+        errors
+      })
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if(this.isValid()) {
+      this.setState({ errors: {} })
+      this.props.addAddressReceiver(this.state)
+    }
   }
 
   render() {
@@ -46,76 +92,96 @@ class ModalAddress extends Component {
       <div className="modal fade kor" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 className="modal-title" id="myModalLabel">New Address</h4>
-            </div>
-            <div className="modal-body">
-              <div className="body-content">
-                <form className="form-add">
-                  <div className="form-group">
-                    <span className="identifier">identifier</span>
-                    <div className="rvi">
-                      <input type="text" name="identifier" className="form-control" spellCheck="false"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <span className="receiver">receiver</span>
-                    <div className="rvi">
-                      <input type="text" name="receiver" className="form-control" spellCheck="false"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <span className="phone">phone</span>
-                    <div className="rvi">
-                      <input type="text" name="phone" className="form-control" spellCheck="false"/>
-                    </div>
-                  </div>
-                  <div className="col-md-4 prov">
-                    <div className="form-group">
-                      <span className="province">province</span>
-                      <div className="rvi">
-                        <select name="province" className="form-control" onChange={this.getRegencyChange}>
-                          <option value="choose_default">Choose Province</option>
-                          { thisProvs }
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 rege">
-                    <div className="form-group">
-                      <span className="regencies">regencies</span>
-                      <div className="rvi">
-                        <select name="regencies" className="form-control" onChange={ this.getDistrictChange}>
-                          <option value="choose_default">Choose Regency</option>
-                          { thisRegency }
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 dist">
-                    <div className="form-group">
-                      <span className="district">district</span>
-                      <div className="rvi">
-                        <select name="district" className="form-control">
-                          <option value="choose_default">Choose District</option>
-                          { thisDistrict }
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <span className="address">address</span>
-                    <div className="rvi">
-                      <textarea name="address" className="form-control posy" spellCheck="false"></textarea>
-                    </div>
-                  </div>
-                </form>
+            <form onSubmit={this.handleSubmit}>
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title" id="myModalLabel">New Address</h4>
               </div>
+              <div className="modal-body">
+                <div className="body-content">
+                  <div className="form-add">
+                    <div className="form-group">
+                      <span className="identifier">identifier</span>
+                      <div className="rvi">
+                        <input type="text" value={this.state.identifier} name="identifier" className="form-control"
+                          spellCheck="false" onChange={this.handleChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <span className="receiver">receiver</span>
+                      <div className="rvi">
+                        <input type="text" name="receiver" value={this.state.receiver} className="form-control"
+                          spellCheck="false" onChange={this.handleChange}/>
+                      </div>
+                    </div>
+                    <div className="col-md-6" style={{paddingLeft: '0px', paddingRight: '7.5px'}}>
+                      <div className="form-group">
+                        <span className="phone">phone</span>
+                        <div className="rvi">
+                          <input type="text" name="phone" value={this.state.phone} className="form-control"
+                            spellCheck="false" onChange={this.handleChange}/>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-6" style={{paddingRight: '0px', paddingLeft: '7.5px'}}>
+                      <div className="form-group">
+                        <span className="phone">zipcode</span>
+                        <div className="rvi">
+                          <input type="text" name="zipcode" value={this.state.zipcode} className="form-control"
+                            spellCheck="false" onChange={this.handleChange}/>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-4 prov">
+                      <div className="form-group">
+                        <span className="province">province</span>
+                        <div className="rvi">
+                          <select name="province" className="form-control" value={this.state.province}
+                            onClick={this.getRegencyChange} onChange={this.handleChange}>
+                            <option value="choose_default">Choose Province</option>
+                            { thisProvs }
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-4 rege">
+                      <div className="form-group">
+                        <span className="regency">regencies</span>
+                        <div className="rvi">
+                          <select name="regency" className="form-control" value={this.state.regency}
+                            onClick={ this.getDistrictChange} onChange={this.handleChange}>
+                            <option value="choose_default">Choose Regency</option>
+                            { thisRegency }
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-4 dist">
+                      <div className="form-group">
+                        <span className="district">district</span>
+                        <div className="rvi">
+                          <select name="district" value={this.state.district} className="form-control"
+                            onChange={this.handleChange}>
+                            <option value="choose_default">Choose District</option>
+                            { thisDistrict }
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <span className="address">address</span>
+                      <div className="rvi">
+                        <textarea name="address" value={this.state.address} className="form-control posy"
+                          spellCheck="false" onChange={this.handleChange}></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+              <button className="btn btn-primary bry">SAVE</button>
             </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary bry">SAVE</button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

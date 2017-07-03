@@ -9,6 +9,7 @@ import preferences from './preference';
 import provinces from './province';
 import regencies from './regency';
 import districts from './district';
+import addresses from './address';
 
 export default combineReducers({
   user,
@@ -19,5 +20,6 @@ export default combineReducers({
   preferences,
   provinces,
   regencies,
-  districts
+  districts,
+  addresses
 });

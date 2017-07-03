@@ -13,13 +13,16 @@ var AddReceiveSchema = new mongoose.Schema({
     type: String, require: true, lowercase: true
   },
   province: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'provinces'
+    type: Number, ref: 'provinces'
   },
   regency: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'regencies'
+    type: Number, ref: 'regencies'
   },
-  subdistrict: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'districts'
+  district: {
+    type: Number, ref: 'districts'
+  },
+  zipcode: {
+    type: String, require: true
   }
 })
 

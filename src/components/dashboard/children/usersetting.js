@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 import DashNav from '../../../shared/dashboardnav';
+import { settingUser } from '../../../../validate/setting';
+import ModalAddress from './modal_address';
 import {
   setFetchAccount,
   editUserAccount,
@@ -12,9 +14,8 @@ import {
   getUserPreferences,
   getProvince,
   getRegency,
-  getDistrict } from '../../../actions/accounts';
-import { settingUser } from '../../../../validate/setting';
-import ModalAddress from './modal_address';
+  getDistrict,
+  addAddressReceiver } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -114,15 +115,15 @@ class UserSetting extends Component {
     })
     if(this.isValid()) {
       this.setState({ errors: {} })
+      let that = this;
+      this.props.editUserAccount(this.state, this.props.current_user.user._id).then(() => {
+        setTimeout(function () {
+          that.setState({
+            isLoading: false
+          })
+        }, 3000);
+      })
     }
-    let that = this;
-    this.props.editUserAccount(this.state, this.props.current_user.user._id).then(() => {
-      setTimeout(function () {
-        that.setState({
-          isLoading: false
-        })
-      }, 3000);
-    })
   }
 
   preferenceChange(e) {
@@ -351,7 +352,7 @@ class UserSetting extends Component {
         </div>
         <ModalAddress provinces = { this.props.provinces } regencies = { this.props.regencies }
           districts = { this.props.districts } getRegency = { this.props.getRegency }
-          getDistrict = { this.props.getDistrict }/>
+          getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver }/>
       </div>
     )
   }
@@ -376,7 +377,8 @@ function mapDispatchToProps(dispatch) {
     getUserPreferences: (id) => dispatch(getUserPreferences(id)),
     getProvince: () => dispatch(getProvince()),
     getRegency: (id) => dispatch(getRegency(id)),
-    getDistrict: (id) => dispatch(getDistrict(id))
+    getDistrict: (id) => dispatch(getDistrict(id)),
+    addAddressReceiver: (data) => dispatch(addAddressReceiver(data))
   }
 }
 

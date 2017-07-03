@@ -5,6 +5,7 @@ var prefrence = require('../models/prefrence');
 var province = require('../models/province');
 var regency = require('../models/regency');
 var district = require('../models/district');
+var address = require('../models/address_receiver');
 var router = express.Router();
 
 router.get('/5872c4ec0e00167ab362/:id/8714c9ac5782c5eb63b5', (req, res, next) => {
@@ -93,6 +94,21 @@ router.get('/d903pdijwedoj3rh0hf0/do30wfhe0ifh3yr48/:id/nfpa3847gfdjf93', (req, 
   var regency = parseInt(req.params.id);
   district.find({'regency': regency}, (err, district) => {
     res.json({ district })
+  })
+})
+
+router.post('/oi39ry94gf3o98flk/dj8459hf3f9hf948y983', (req, res, next) => {
+  var addr = new address();
+  addr.identifier = req.body.identifier;
+  addr.receiver = req.body.receiver;
+  addr.phone = req.body.phone;
+  addr.province = parseInt(req.body.province);
+  addr.regency = parseInt(req.body.regency);
+  addr.district = parseInt(req.body.district);
+  addr.address = req.body.address;
+  addr.zipcode = req.body.zipcode;
+  addr.save((err, address) => {
+    res.json({ address })
   })
 })
 
