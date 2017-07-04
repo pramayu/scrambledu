@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 
 import { addressReceiver } from '../../../../validate/address';
 
@@ -15,7 +16,8 @@ class ModalAddress extends Component {
       district: 0,
       address: '',
       zipcode: '',
-      errors: {}
+      errors: {},
+      isLoading: false
     }
     this.getRegencyChange = this.getRegencyChange.bind(this)
     this.getDistrictChange = this.getDistrictChange.bind(this)
@@ -57,8 +59,25 @@ class ModalAddress extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.isValid()) {
-      this.setState({ errors: {} })
-      this.props.addAddressReceiver(this.state)
+      this.setState({ errors: {}, isLoading: true })
+      this.props.addAddressReceiver(this.state, this.props.current_user._id).then(() => {
+        this.setState({
+          identifier: '',
+          receiver: '',
+          phone: '',
+          province: 'choose_default',
+          regency: 'choose_default',
+          district: 'choose_default',
+          address: '',
+          zipcode: '',
+        })
+        let that = this;
+        setTimeout(function () {
+          that.setState({
+            isLoading: false
+          })
+        }, 2000);
+      })
     }
   }
 
@@ -182,6 +201,9 @@ class ModalAddress extends Component {
               <button className="btn btn-primary bry">SAVE</button>
             </div>
             </form>
+            <div className={classnames('line-scale-pulse-out loading_', {'line-scale-pulse-in': this.state.isLoading === true})}>
+              <div></div><div></div><div></div><div></div><div></div>
+            </div>
           </div>
         </div>
       </div>

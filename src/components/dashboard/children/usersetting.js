@@ -15,7 +15,8 @@ import {
   getProvince,
   getRegency,
   getDistrict,
-  addAddressReceiver } from '../../../actions/accounts';
+  addAddressReceiver,
+  getAddressReceiver } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -51,6 +52,7 @@ class UserSetting extends Component {
     this.props.setFetchAccount(this.props.current_user.user._id)
     this.props.getUserPreferences(this.props.current_user.user._id)
     this.props.getProvince()
+    this.props.getAddressReceiver(this.props.current_user.user._id)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -138,6 +140,32 @@ class UserSetting extends Component {
   }
 
   render() {
+    let address = Object.assign([], this.props.address)
+    let addressLoop = (
+      address.map((addr, id) => {
+        return (
+          <ul key={id} className={classnames('list-unstyled chft cgyuo', {'cgyuo_': (id + 1)%2 === 0})}>
+            <li className="name">{ addr.identifier }</li>
+            <li className="receiver">{ addr.receiver }</li>
+            <li className="phone">{ addr.phone }</li>
+            <li className="adres">
+              {
+                addr.address + ', '
+                + addr.district.name.slice(0).toLowerCase() + ', '
+                + addr.regency.name.slice(0).toLowerCase() + ', '
+                + addr.province.name.slice(0).toLowerCase() + ', '
+                + addr.zipcode
+              }
+            </li>
+            <li className="action">
+              <span className="fa fa-pencil-square-o"></span>
+              <span className="fa fa-trash-o"></span>
+            </li>
+          </ul>
+        )
+      })
+    )
+
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
@@ -292,26 +320,7 @@ class UserSetting extends Component {
                   <li className="adres">ADDRESS</li>
                   <li className="action">ACTION</li>
                 </ul>
-                <ul className="list-unstyled chft cgyuo">
-                  <li className="name">Alamat Rumah</li>
-                  <li className="receiver">Tiara Westlake</li>
-                  <li className="phone">+6205727072248</li>
-                  <li className="adres">Jalan Lely4, No.915, Condong Catur, Depok, Sleman, Yogyakarta, 55832</li>
-                  <li className="action">
-                    <span className="fa fa-pencil-square-o"></span>
-                    <span className="fa fa-trash-o"></span>
-                  </li>
-                </ul>
-                <ul className="list-unstyled chft cgyuo">
-                  <li style={{backgroundColor: '#f7f7f7' }} className="name">Alamat Kost</li>
-                  <li style={{backgroundColor: '#f7f7f7' }} className="receiver">Jack Frags</li>
-                  <li style={{backgroundColor: '#f7f7f7' }} className="phone">+6205727072248</li>
-                  <li style={{backgroundColor: '#f7f7f7' }} className="adres">Dusun Dalem, Desa Jinengdalem, Kec.Buleleng, Kab.Buleleng, Bali, 55832</li>
-                  <li style={{backgroundColor: '#f7f7f7' }} className="action">
-                    <span className="fa fa-pencil-square-o"></span>
-                    <span className="fa fa-trash-o"></span>
-                  </li>
-                </ul>
+                { addressLoop }
               </div>
             </div>
           </div>
@@ -351,7 +360,7 @@ class UserSetting extends Component {
           </div>
         </div>
         <ModalAddress provinces = { this.props.provinces } regencies = { this.props.regencies }
-          districts = { this.props.districts } getRegency = { this.props.getRegency }
+          districts = { this.props.districts } getRegency = { this.props.getRegency } current_user = { this.props.current_user.user }
           getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver }/>
       </div>
     )
@@ -365,7 +374,8 @@ function mapStateToProps(state) {
     preferences: state.preferences,
     provinces: state.provinces,
     regencies: state.regencies,
-    districts: state.districts
+    districts: state.districts,
+    address: state.addresses
   }
 }
 
@@ -378,7 +388,8 @@ function mapDispatchToProps(dispatch) {
     getProvince: () => dispatch(getProvince()),
     getRegency: (id) => dispatch(getRegency(id)),
     getDistrict: (id) => dispatch(getDistrict(id)),
-    addAddressReceiver: (data) => dispatch(addAddressReceiver(data))
+    addAddressReceiver: (data, id) => dispatch(addAddressReceiver(data, id)),
+    getAddressReceiver: (id) => dispatch(getAddressReceiver(id))
   }
 }
 

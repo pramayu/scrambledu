@@ -1,5 +1,7 @@
 var express = require('express');
 var _ = require('lodash');
+var async = require('async');
+
 var user = require('../models/user');
 var prefrence = require('../models/prefrence');
 var province = require('../models/province');
@@ -97,19 +99,42 @@ router.get('/d903pdijwedoj3rh0hf0/do30wfhe0ifh3yr48/:id/nfpa3847gfdjf93', (req, 
   })
 })
 
-router.post('/oi39ry94gf3o98flk/dj8459hf3f9hf948y983', (req, res, next) => {
-  var addr = new address();
-  addr.identifier = req.body.identifier;
-  addr.receiver = req.body.receiver;
-  addr.phone = req.body.phone;
-  addr.province = parseInt(req.body.province);
-  addr.regency = parseInt(req.body.regency);
-  addr.district = parseInt(req.body.district);
-  addr.address = req.body.address;
-  addr.zipcode = req.body.zipcode;
-  addr.save((err, address) => {
-    res.json({ address })
+router.post('/oi39ry94gf3o98flk/:id/dj8459hf3f9hf948y983', (req, res, next) => {
+  async.waterfall([
+    function addNewAddr(done) {
+      var addr = new address();
+      addr.identifier = req.body.identifier;
+      addr.receiver = req.body.receiver;
+      addr.phone = req.body.phone;
+      addr.province = parseInt(req.body.province);
+      addr.regency = parseInt(req.body.regency);
+      addr.district = parseInt(req.body.district);
+      addr.address = req.body.address;
+      addr.zipcode = req.body.zipcode;
+      addr.user = req.params.id;
+      addr.save((err, address) => {
+        done(null, addr)
+      })
+    },
+    function getNewAddr(addr, done) {
+      address.findOne({'_id': addr._id})
+        .populate('province regency district')
+        .exec((err, addr) => {
+          done(null, addr)
+        })
+    }
+  ], (err, addr) => {
+    res.json({ address: addr })
   })
+})
+
+router.get('/doi3e3089e3dhdeih/:id/diw8903938249rhhkj', (req, res, next) => {
+  var user_id = req.params.id;
+  address.find({'user': user_id})
+    .populate('province regency district')
+    .exec((err, addr) => {
+      res.json({ address: addr})
+    })
 })
 
 module.exports = router;

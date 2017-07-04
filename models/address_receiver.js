@@ -23,6 +23,12 @@ var AddReceiveSchema = new mongoose.Schema({
   },
   zipcode: {
     type: String, require: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'users'
+  },
+  created_at: {
+    type: Date, default: Date.now
   }
 })
 

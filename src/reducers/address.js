@@ -1,4 +1,4 @@
-import { SET_NEW_ADDRESS } from '../actions/accounts';
+import { SET_NEW_ADDRESS, SET_ADDRESS_RECEIVER } from '../actions/accounts';
 
 let initialState = {
   address: []
@@ -11,6 +11,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         Object.assign({}, action.address)
       ]
+    case SET_ADDRESS_RECEIVER:
+      return action.address
     default:
       return state;
   }

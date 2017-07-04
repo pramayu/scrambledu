@@ -8,6 +8,7 @@ export let SET_PROVINCE = 'SET_PROVINCE';
 export let SET_REGENCY = 'SET_REGENCY';
 export let SET_DISTRICT = 'SET_DISTRICT';
 export let SET_NEW_ADDRESS = 'SET_NEW_ADDRESS';
+export let SET_ADDRESS_RECEIVER = 'SET_ADDRESS_RECEIVER';
 
 export function getAccount() {
   return {
@@ -60,6 +61,13 @@ export function setDistrict(districts) {
 export function setNewAddress(address) {
   return {
     type: SET_NEW_ADDRESS,
+    address
+  }
+}
+
+export function setAddressReceiver(address) {
+  return {
+    type: SET_ADDRESS_RECEIVER,
     address
   }
 }
@@ -127,16 +135,24 @@ export function getDistrict(id) {
   }
 }
 
-export function addAddressReceiver(data) {
+export function addAddressReceiver(data, id) {
   console.log(data)
   return dispatch => {
     return axios({
       method: 'post',
-      url: '/sliquo2i4o3r23oufrg38/oi39ry94gf3o98flk/dj8459hf3f9hf948y983',
+      url: `/sliquo2i4o3r23oufrg38/oi39ry94gf3o98flk/${id}/dj8459hf3f9hf948y983`,
       data: data,
       headers: {
         'Content-Type': 'application/json'
       }
     }).then((res) => { dispatch(setNewAddress(res.data.address))})
+  }
+}
+
+
+export function getAddressReceiver(id) {
+  return dispatch => {
+    return axios.get(`/sliquo2i4o3r23oufrg38/doi3e3089e3dhdeih/${id}/diw8903938249rhhkj`)
+      .then((res) => { dispatch(setAddressReceiver(res.data.address))})
   }
 }
