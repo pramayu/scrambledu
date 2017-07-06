@@ -18,6 +18,15 @@ export function addressReceiver(data) {
   if(validator.isEmpty(data.zipcode)) {
     errors.zipcode = 'this field is required';
   }
+  if(data.province === 'choose_default') {
+    errors.province = 'this field is required';
+  }
+  if(data.regency === 'choose_default') {
+    errors.regency = 'this field is required';
+  }
+  if(data.district === 'choose_default') {
+    errors.district = 'this field is required';
+  }
   return {
     errors,
     isValid: _.isEmpty(errors)

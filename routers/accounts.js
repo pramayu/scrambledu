@@ -137,4 +137,44 @@ router.get('/doi3e3089e3dhdeih/:id/diw8903938249rhhkj', (req, res, next) => {
     })
 })
 
+router.delete('/dwijd09089ew04fh08/:id/ewo309jfweif39rf', (req, res, next) => {
+  var addr_id = req.params.id;
+  address.findByIdAndRemove(addr_id, (err, addr) => {
+    res.json({success: 'delete successfully'})
+  })
+})
+
+router.put('/doi3ue938hd9dhweoih/:id/:user_id', (req, res, next) => {
+  var id = req.params.id;
+  var user_id = req.params.user_id;
+  async.waterfall([
+    function getUserById(done) {
+      address.findOne({'_id': id}, (err, addr) => {
+        if(addr.user.toString() === user_id.toString()) {
+          addr.identifier = req.body.identifier || addr.identifier;
+          addr.receiver = req.body.receiver || addr.receiver;
+          addr.phone = req.body.phone || addr.phone;
+          addr.province = req.body.province || addr.province;
+          addr.regency = req.body.regency || addr.regency;
+          addr.district = req.body.district || addr.district;
+          addr.address = req.body.address || addr.address;
+          addr.zipcode = req.body.zipcode || addr.zipcode;
+          addr.save((err, addrs) => {
+            done(null, addrs)
+          })
+        }
+      })
+    },
+    function getAddress(addrs, done) {
+      address.findOne({'_id': addrs._id})
+        .populate('province regency district')
+        .exec((err, addrs) => {
+          done(null, addrs)
+        })
+    }
+  ], (err, addrs) => {
+    res.json({ address: addrs })
+  })
+})
+
 module.exports = router;

@@ -9,6 +9,8 @@ export let SET_REGENCY = 'SET_REGENCY';
 export let SET_DISTRICT = 'SET_DISTRICT';
 export let SET_NEW_ADDRESS = 'SET_NEW_ADDRESS';
 export let SET_ADDRESS_RECEIVER = 'SET_ADDRESS_RECEIVER';
+export let SET_DELETE_ADDRESS = 'SET_DELETE_ADDRESS';
+export let SET_EDIT_ADDRESS = 'SET_EDIT_ADDRESS';
 
 export function getAccount() {
   return {
@@ -68,6 +70,20 @@ export function setNewAddress(address) {
 export function setAddressReceiver(address) {
   return {
     type: SET_ADDRESS_RECEIVER,
+    address
+  }
+}
+
+export function setDeleteAddress(id) {
+  return {
+    type: SET_DELETE_ADDRESS,
+    id
+  }
+}
+
+export function setEditAddress(address) {
+  return {
+    type: SET_EDIT_ADDRESS,
     address
   }
 }
@@ -154,5 +170,27 @@ export function getAddressReceiver(id) {
   return dispatch => {
     return axios.get(`/sliquo2i4o3r23oufrg38/doi3e3089e3dhdeih/${id}/diw8903938249rhhkj`)
       .then((res) => { dispatch(setAddressReceiver(res.data.address))})
+  }
+}
+
+export function deleteAddressReceiver(id) {
+  return dispatch => {
+    return axios.delete(`/sliquo2i4o3r23oufrg38/dwijd09089ew04fh08/${id}/ewo309jfweif39rf`)
+      .then(() => { dispatch(setDeleteAddress(id))})
+  }
+}
+
+export function getEditAddress(id, user_id, data) {
+  return dispatch => {
+    return axios({
+      method: 'put',
+      url: `/sliquo2i4o3r23oufrg38/doi3ue938hd9dhweoih/${id}/${user_id}`,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => {
+      dispatch(setEditAddress(res.data.address))
+    })
   }
 }

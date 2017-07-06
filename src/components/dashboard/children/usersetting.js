@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import DashNav from '../../../shared/dashboardnav';
 import { settingUser } from '../../../../validate/setting';
@@ -16,7 +17,9 @@ import {
   getRegency,
   getDistrict,
   addAddressReceiver,
-  getAddressReceiver } from '../../../actions/accounts';
+  getAddressReceiver,
+  deleteAddressReceiver,
+  getEditAddress } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -40,12 +43,23 @@ class UserSetting extends Component {
       security: '',
       languages: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      identifier: '',
+      receiver: '',
+      phone: '',
+      province: 0,
+      regency: 0,
+      district: 0,
+      address: '',
+      zipcode: '',
+      address_edt: false,
+      addr_id: ''
     }
     this.birthChange = this.birthChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.userSubmit = this.userSubmit.bind(this)
     this.preferenceChange = this.preferenceChange.bind(this)
+    this.resetEditAddr = this.resetEditAddr.bind(this)
   }
 
   componentWillMount() {
@@ -139,6 +153,44 @@ class UserSetting extends Component {
     this.props.editUserPrefrences(setting, this.props.current_user.user._id)
   }
 
+  deleteAddressReceiver(id) {
+    this.props.deleteAddressReceiver(id)
+  }
+
+  findAddressById(id) {
+    _.result(_.find(this.props.address, (addr) => {
+      if(id === addr._id) {
+        this.setState({
+          identifier: addr.identifier,
+          receiver: addr.receiver,
+          phone: addr.phone,
+          province: addr.province._id,
+          regency: addr.regency._id,
+          district: addr.district._id,
+          address: addr.address,
+          zipcode: addr.zipcode,
+          address_edt: true,
+          addr_id: addr._id
+        })
+      }
+    }))
+  }
+
+  resetEditAddr() {
+    this.setState({
+      identifier: '',
+      receiver: '',
+      phone: '',
+      province: 0,
+      regency: 0,
+      district: 0,
+      address: '',
+      zipcode: '',
+      address_edt: false,
+      addr_id: ''
+    })
+  }
+
   render() {
     let address = Object.assign([], this.props.address)
     let addressLoop = (
@@ -158,14 +210,27 @@ class UserSetting extends Component {
               }
             </li>
             <li className="action">
-              <span className="fa fa-pencil-square-o"></span>
-              <span className="fa fa-trash-o"></span>
+              <span className="fa fa-pencil-square-o" onClick={this.findAddressById.bind(this, addr._id)}
+                data-toggle="modal" data-target="#myModal"></span>
+              <span className="fa fa-trash-o" onClick = { this.deleteAddressReceiver.bind(this, addr._id) }></span>
             </li>
           </ul>
         )
       })
     )
 
+    let addr_ = {
+      _id: this.state.addr_id,
+      identifier: this.state.identifier,
+      receiver: this.state.receiver,
+      phone: this.state.phone,
+      province: this.state.province,
+      regency: this.state.regency,
+      district: this.state.district,
+      address: this.state.address,
+      zipcode: this.state.zipcode,
+      address_edt: this.state.address_edt,
+    }
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
@@ -361,7 +426,8 @@ class UserSetting extends Component {
         </div>
         <ModalAddress provinces = { this.props.provinces } regencies = { this.props.regencies }
           districts = { this.props.districts } getRegency = { this.props.getRegency } current_user = { this.props.current_user.user }
-          getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver }/>
+          getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver } addrs_ = { addr_ }
+          resetEditAddr = { this.resetEditAddr } getEditAddress = {this.props.getEditAddress}/>
       </div>
     )
   }
@@ -389,7 +455,9 @@ function mapDispatchToProps(dispatch) {
     getRegency: (id) => dispatch(getRegency(id)),
     getDistrict: (id) => dispatch(getDistrict(id)),
     addAddressReceiver: (data, id) => dispatch(addAddressReceiver(data, id)),
-    getAddressReceiver: (id) => dispatch(getAddressReceiver(id))
+    getAddressReceiver: (id) => dispatch(getAddressReceiver(id)),
+    deleteAddressReceiver: (id) => dispatch(deleteAddressReceiver(id)),
+    getEditAddress: (id, user_id, data) => dispatch(getEditAddress(id, user_id, data))
   }
 }
 
