@@ -10,6 +10,7 @@ import provinces from './province';
 import regencies from './regency';
 import districts from './district';
 import addresses from './address';
+import bank from './bank';
 
 export default combineReducers({
   user,
@@ -21,5 +22,6 @@ export default combineReducers({
   provinces,
   regencies,
   districts,
-  addresses
+  addresses,
+  bank
 });

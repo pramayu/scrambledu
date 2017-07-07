@@ -14,5 +14,9 @@ module.exports = {
     'clientID': '144057272005-3b01j2lfohtujsa3gn43vh5pnubfoo28.apps.googleusercontent.com',
     'clientSecret': 'xtwMmuwRINSCGhVwc4oh1wWF',
     'callbackURL': 'http://localhost:3000/signup/auth/google/callback'
+  },
+  'twilio': {
+    'SID': 'AC6cf33455f6b25940d9ce1751204e8670',
+    'AUTH': '8f7c056965e253a6217d9ab5d2a47745'
   }
 }

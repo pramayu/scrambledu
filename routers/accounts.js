@@ -1,14 +1,21 @@
 var express = require('express');
 var _ = require('lodash');
 var async = require('async');
+var randomstring = require('randomstring');
+var twilio = require('twilio');
 
+var config = require('../config/main');
 var user = require('../models/user');
 var prefrence = require('../models/prefrence');
 var province = require('../models/province');
 var regency = require('../models/regency');
 var district = require('../models/district');
 var address = require('../models/address_receiver');
+var bank = require('../models/bank');
+var bankAccount = require('../models/bankaccount');
 var router = express.Router();
+
+var client = new twilio(config.twilio.SID, config.twilio.AUTH);
 
 router.get('/5872c4ec0e00167ab362/:id/8714c9ac5782c5eb63b5', (req, res, next) => {
   var user_id = req.params.id;
@@ -174,6 +181,65 @@ router.put('/doi3ue938hd9dhweoih/:id/:user_id', (req, res, next) => {
     }
   ], (err, addrs) => {
     res.json({ address: addrs })
+  })
+})
+
+router.get('/lkasend39rlsk0390fj/dou3h82374deuifg', (req, res, next) => {
+  bank.find({}, (err, _bank) => {
+    res.json({bank: _bank})
+  })
+})
+
+router.post('/p39r30fhj0rhf3r398r3y4tt/:user_id', (req, res, next) => {
+  var user_id = req.params.user_id;
+  var bankAc = new bankAccount({
+    user: req.body.user
+  })
+  bankAc.save((err, bank) => {
+    res.json({ bank })
+  })
+})
+
+
+router.delete('/djowiondsfhofhefhdfh/:id/:user_id', (req, res, next) => {
+  var _id = req.params.id;
+  bankAccount.findByIdAndRemove(_id, (err, bank) => {
+    res.json({success: 'delete successfully'})
+  })
+})
+
+router.get('/diwejr834refeiufhwuihf/dk038ejdksjkflsfkjdf/:user_id/:id', (req, res, next) => {
+  var user_id = req.params.user_id;
+  var id = req.params.id;
+  var token=randomstring.generate({length: 4, charset: 'numeric'});
+  async.waterfall([
+    function findUser(done) {
+      user.findOne({'_id': user_id}, '_id username phone', (err, user) => {
+        if(!_.isEmpty(user)) {
+          done(null, user)
+          console.log(user)
+        }
+      })
+    },
+    function findBank(user, done) {
+      bankAccount.findOne({'_id': id}, (err, bank) => {
+        console.log(bank + ' ' + user.phone)
+        if(!_.isEmpty(bank)) {
+          client.messages.create({
+            body: `Your OTP code is ${token}`,
+            to: user.phone,
+            from: '+14435267447'
+          }).then((message) => {
+            bank.otp = token;
+            bank.save((err, bank) => {
+              done(null, bank)
+            })
+          })
+        }
+      })
+    }
+  ], (err, bank) => {
+    res.json({bank})
   })
 })
 

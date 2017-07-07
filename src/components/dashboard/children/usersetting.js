@@ -8,6 +8,7 @@ import _ from 'lodash';
 import DashNav from '../../../shared/dashboardnav';
 import { settingUser } from '../../../../validate/setting';
 import ModalAddress from './modal_address';
+import ModalBank from './modal_bank';
 import {
   setFetchAccount,
   editUserAccount,
@@ -19,7 +20,11 @@ import {
   addAddressReceiver,
   getAddressReceiver,
   deleteAddressReceiver,
-  getEditAddress } from '../../../actions/accounts';
+  getEditAddress,
+  getBankName,
+  addNewBankAccount,
+  delBankNewAccount,
+  sendOtpCode } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -53,13 +58,15 @@ class UserSetting extends Component {
       address: '',
       zipcode: '',
       address_edt: false,
-      addr_id: ''
+      addr_id: '',
+      bankAcId: ''
     }
     this.birthChange = this.birthChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.userSubmit = this.userSubmit.bind(this)
     this.preferenceChange = this.preferenceChange.bind(this)
     this.resetEditAddr = this.resetEditAddr.bind(this)
+    this.getBankName = this.getBankName.bind(this)
   }
 
   componentWillMount() {
@@ -187,7 +194,21 @@ class UserSetting extends Component {
       address: '',
       zipcode: '',
       address_edt: false,
-      addr_id: ''
+      addr_id: '',
+      newAc: false
+    })
+  }
+
+  getBankName() {
+    this.props.getBankName();
+    let data = {
+      user: this.props.current_user.user._id
+    }
+    this.props.addNewBankAccount(this.props.current_user.user._id, data).then((res) => {
+      this.setState({
+        bankAcId: res.data.bank._id,
+        newAc: true
+      })
     })
   }
 
@@ -231,6 +252,12 @@ class UserSetting extends Component {
       zipcode: this.state.zipcode,
       address_edt: this.state.address_edt,
     }
+
+    let bankAc = {
+      _id: this.state.bankAcId,
+      newAc: this.state.newAc
+    }
+
     return (
       <div>
         <DashNav caption="Settings" childcap="Give us valid data"/>
@@ -401,7 +428,9 @@ class UserSetting extends Component {
               </div>
             </div>
             <div className={classnames('afress', {'showcollapse': '4' === this.state.active})}>
-              <button className="btn btn-new-adress">ADD BANK ACCOUNT</button>
+              <button className="btn btn-new-adress" data-toggle="modal" data-target="#myModalBank" onClick={this.getBankName}>
+                ADD BANK ACCOUNT
+              </button>
               <div className="dheiuy">
                 <ul className="list-unstyled chft">
                   <li className="name">OWNER</li>
@@ -428,6 +457,8 @@ class UserSetting extends Component {
           districts = { this.props.districts } getRegency = { this.props.getRegency } current_user = { this.props.current_user.user }
           getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver } addrs_ = { addr_ }
           resetEditAddr = { this.resetEditAddr } getEditAddress = {this.props.getEditAddress}/>
+        <ModalBank current_user = { this.props.current_user.user} bank = { this.props.bank }
+          bankAc = { bankAc } delBankNewAccount = {this.props.delBankNewAccount} sendOtpCode = {this.props.sendOtpCode}/>
       </div>
     )
   }
@@ -441,7 +472,8 @@ function mapStateToProps(state) {
     provinces: state.provinces,
     regencies: state.regencies,
     districts: state.districts,
-    address: state.addresses
+    address: state.addresses,
+    bank: state.bank
   }
 }
 
@@ -457,7 +489,11 @@ function mapDispatchToProps(dispatch) {
     addAddressReceiver: (data, id) => dispatch(addAddressReceiver(data, id)),
     getAddressReceiver: (id) => dispatch(getAddressReceiver(id)),
     deleteAddressReceiver: (id) => dispatch(deleteAddressReceiver(id)),
-    getEditAddress: (id, user_id, data) => dispatch(getEditAddress(id, user_id, data))
+    getEditAddress: (id, user_id, data) => dispatch(getEditAddress(id, user_id, data)),
+    getBankName: () => dispatch(getBankName()),
+    addNewBankAccount: (user_id, data) => dispatch(addNewBankAccount(user_id, data)),
+    delBankNewAccount: (user_id, id) => dispatch(delBankNewAccount(user_id, id)),
+    sendOtpCode: (user_id, id) => dispatch(sendOtpCode(user_id, id))
   }
 }
 

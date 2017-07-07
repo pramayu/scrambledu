@@ -243,8 +243,8 @@ class ModalAddress extends Component {
                 </div>
               </div>
               <div className="modal-footer">
-              <button className="btn btn-primary bry">SAVE</button>
-            </div>
+                <button className="btn btn-primary bry">SAVE</button>
+              </div>
             </form>
             <div className={classnames('line-scale-pulse-out loading_', {'line-scale-pulse-in': this.state.isLoading === true})}>
               <div></div><div></div><div></div><div></div><div></div>
