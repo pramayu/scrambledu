@@ -24,7 +24,8 @@ import {
   getBankName,
   addNewBankAccount,
   delBankNewAccount,
-  sendOtpCode } from '../../../actions/accounts';
+  sendOtpCode,
+  updateBankData } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -324,6 +325,7 @@ class UserSetting extends Component {
                     <label htmlFor="">mobile phone</label>
                     <input type="text" className="form-control" name="phone"
                       value={this.state.phone} onChange={this.handleChange}/>
+                    <span className="exam">Example: +6285727072xxx</span>
                   </div>
               </div>
                 </form>
@@ -458,7 +460,8 @@ class UserSetting extends Component {
           getDistrict = { this.props.getDistrict } addAddressReceiver = { this.props.addAddressReceiver } addrs_ = { addr_ }
           resetEditAddr = { this.resetEditAddr } getEditAddress = {this.props.getEditAddress}/>
         <ModalBank current_user = { this.props.current_user.user} bank = { this.props.bank }
-          bankAc = { bankAc } delBankNewAccount = {this.props.delBankNewAccount} sendOtpCode = {this.props.sendOtpCode}/>
+          bankAc = { bankAc } delBankNewAccount = {this.props.delBankNewAccount} sendOtpCode = {this.props.sendOtpCode}
+          updateBankData = { this.props.updateBankData }/>
       </div>
     )
   }
@@ -493,7 +496,8 @@ function mapDispatchToProps(dispatch) {
     getBankName: () => dispatch(getBankName()),
     addNewBankAccount: (user_id, data) => dispatch(addNewBankAccount(user_id, data)),
     delBankNewAccount: (user_id, id) => dispatch(delBankNewAccount(user_id, id)),
-    sendOtpCode: (user_id, id) => dispatch(sendOtpCode(user_id, id))
+    sendOtpCode: (user_id, id) => dispatch(sendOtpCode(user_id, id)),
+    updateBankData: (user_id, id, data) => dispatch(updateBankData(user_id, id, data))
   }
 }
 

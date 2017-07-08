@@ -3,6 +3,7 @@ var _ = require('lodash');
 var async = require('async');
 var randomstring = require('randomstring');
 var twilio = require('twilio');
+var bcrypt = require('bcryptjs');
 
 var config = require('../config/main');
 var user = require('../models/user');
@@ -240,6 +241,53 @@ router.get('/diwejr834refeiufhwuihf/dk038ejdksjkflsfkjdf/:user_id/:id', (req, re
     }
   ], (err, bank) => {
     res.json({bank})
+  })
+})
+
+
+router.put('/dk309j03d9j0dj0dh32/:user_id/398erj9r8h39r8h98r/:id/', (req, res, next) => {
+  var user_id = req.params.user_id;
+  var _id = req.params.id;
+  async.waterfall([
+    function getUser(done) {
+      user.findOne({'_id': user_id}, '_id username password', (err, user) => {
+        if(!_.isEmpty(user)) {
+          done(null, user)
+        }
+      })
+    },
+    function updateBankData(user, done) {
+      bcrypt.compare(req.body.pass, user.password, (err, isMatch) => {
+        if(!err && isMatch) {
+          bankAccount.findOne({'_id': _id}, (err, bank) => {
+            if(!_.isEmpty(bank)) {
+              if(user_id.toString() === bank.user.toString()) {
+                if(req.body.otp.toString() === bank.otp.toString()) {
+                  bank.identifier = req.body.identifier || bank.identifier;
+                  bank.rekening = req.body.rekening || bank.rekening;
+                  bank.bankname = req.body.bankname || bank.bankname;
+                  bank.branch = req.body.branch || bank.branch;
+                  bank.save((err, bank) => {
+                    done(null, bank)
+                  })
+                } else {
+                  res.status(500).json({ errors: { form: 'OTP Code is failed'}})
+                }
+              }
+              else {
+                res.status(500).json({ errors: { form: 'Bank Account Not Found'}})
+              }
+            } else {
+              res.status(500).json({ errors: { form: 'Bank Account Not Found'}})
+            }
+          })
+        } else {
+          res.status(500).json({ errors: { form: 'password is invalid'} })
+        }
+      })
+    }
+  ], (err, bank) => {
+    res.json({ bank })
   })
 })
 

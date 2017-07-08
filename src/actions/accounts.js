@@ -12,6 +12,7 @@ export let SET_ADDRESS_RECEIVER = 'SET_ADDRESS_RECEIVER';
 export let SET_DELETE_ADDRESS = 'SET_DELETE_ADDRESS';
 export let SET_EDIT_ADDRESS = 'SET_EDIT_ADDRESS';
 export let SET_BANK_NAME = 'SET_BANK_NAME';
+export let SET_UPDATE_BANK_DATA_AS_NEW = 'SET_UPDATE_BANK_DATA_AS_NEW';
 
 export function getAccount() {
   return {
@@ -92,6 +93,13 @@ export function setEditAddress(address) {
 export function setBankName(bank) {
   return {
     type: SET_BANK_NAME,
+    bank
+  }
+}
+
+export function setUpdateBankData(bank) {
+  return {
+    type: SET_UPDATE_BANK_DATA_AS_NEW,
     bank
   }
 }
@@ -230,8 +238,21 @@ export function delBankNewAccount(user_id, id) {
 }
 
 export function sendOtpCode(user_id, id) {
-  console.log(user_id + ' ' + id)
   return dispatch => {
     return axios.get(`/sliquo2i4o3r23oufrg38/diwejr834refeiufhwuihf/dk038ejdksjkflsfkjdf/${user_id}/${id}`)
+  }
+}
+
+export function updateBankData(user_id, id, data) {
+  console.log(data)
+  return dispatch => {
+    return axios({
+      method: 'put',
+      url: `/sliquo2i4o3r23oufrg38/dk309j03d9j0dj0dh32/${user_id}/398erj9r8h39r8h98r/${id}/`,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => { dispatch(setUpdateBankData(res.data.bank)) })
   }
 }

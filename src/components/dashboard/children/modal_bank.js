@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
+
+import { bankAccount } from '../../../../validate/bank_account';
 
 class ModalBank extends Component {
 
@@ -20,6 +23,8 @@ class ModalBank extends Component {
     }
     this.delBankNewAccount = this.delBankNewAccount.bind(this)
     this.sendOtpCode = this.sendOtpCode.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,6 +55,47 @@ class ModalBank extends Component {
     })
   }
 
+  handleChange(e) {
+    if(!!this.state.errors[e.target.name]) {
+      let errors = Object.assign({}, this.state.errors)
+      delete errors[e.target.name]
+      this.setState({
+        [e.target.name]: e.target.value,
+        errors
+      })
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  isValid() {
+    let { errors, isValid } = bankAccount(this.state);
+    if(!isValid) {
+      this.setState({ errors })
+    }
+    return isValid;
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if(this.isValid()) {
+      this.setState({ errors: {} })
+      this.props.updateBankData(this.props.current_user._id, this.state.bankAcId, this.state).then(() => {
+        this.setState({
+          bankAcId: '',
+          identifier: '',
+          rekening: '',
+          bankname: 'choose_default',
+          branch: '',
+          otp: '',
+          pass: '',
+        })
+      })
+    }
+  }
+
   render() {
     let bankChoose = (
       this.props.bank.bank.map((bank, id) => {
@@ -62,9 +108,10 @@ class ModalBank extends Component {
       <div className="modal fade kor" id="myModalBank" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.delBankNewAccount}>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"
+                  onClick={!_.isEmpty(this.state.bankAcId) ? this.delBankNewAccount : ''}>
                   <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 className="modal-title" id="myModalLabel">Add New Bank Account</h4>
@@ -76,21 +123,21 @@ class ModalBank extends Component {
                       <span className="identifier">identifier</span>
                       <div className='rvi'>
                         <input type="text" name="identifier" className="form-control"
-                          spellCheck="false" autoComplete="off"/>
+                          spellCheck="false" autoComplete="off" onChange={this.handleChange}/>
                       </div>
                     </div>
                     <div className='form-group'>
                       <span className="rekening">number</span>
                       <div className='rvi'>
                         <input type="text" name="rekening" className="form-control"
-                          spellCheck="false" autoComplete="off"/>
+                          spellCheck="false" autoComplete="off" onChange={this.handleChange}/>
                       </div>
                     </div>
                     <div className="col-md-6" style={{paddingLeft: '0px', paddingRight: '7.5px'}}>
                       <div className='form-group'>
                         <span className="bank-name">bank name</span>
                         <div className="rvi">
-                          <select name="bankname" className="form-control">
+                          <select name="bankname" className="form-control" onChange={this.handleChange}>
                             <option value="choose_default">Choose Bank</option>
                             { bankChoose }
                           </select>
@@ -102,7 +149,7 @@ class ModalBank extends Component {
                         <span className="branch">branch</span>
                         <div className='rvi'>
                           <input type="text" name="branch" className="form-control"
-                            spellCheck="false" autoComplete="off"/>
+                            spellCheck="false" autoComplete="off" onChange={this.handleChange}/>
                         </div>
                       </div>
                     </div>
@@ -111,7 +158,7 @@ class ModalBank extends Component {
                         <span className="otp">otp code</span>
                         <div className='rvi'>
                           <input type="text" name="otp" className="form-control"
-                            spellCheck="false" autoComplete="off"/>
+                            spellCheck="false" autoComplete="off" onChange={this.handleChange}/>
                         </div>
                       </div>
                     </div>
@@ -126,8 +173,8 @@ class ModalBank extends Component {
                     <div className='form-group'>
                       <span className="pass">current password</span>
                       <div className='rvi'>
-                        <input type="text" name="pass" className="form-control"
-                          spellCheck="false" autoComplete="off"/>
+                        <input type="password" style={{textTransform: 'lowercase'}} name="pass" className="form-control"
+                          spellCheck="false" autoComplete="off" onChange={this.handleChange}/>
                       </div>
                     </div>
                   </div>
