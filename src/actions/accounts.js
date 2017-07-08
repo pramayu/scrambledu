@@ -13,6 +13,7 @@ export let SET_DELETE_ADDRESS = 'SET_DELETE_ADDRESS';
 export let SET_EDIT_ADDRESS = 'SET_EDIT_ADDRESS';
 export let SET_BANK_NAME = 'SET_BANK_NAME';
 export let SET_UPDATE_BANK_DATA_AS_NEW = 'SET_UPDATE_BANK_DATA_AS_NEW';
+export let SET_BANK_DATA = 'SET_BANK_DATA';
 
 export function getAccount() {
   return {
@@ -100,6 +101,13 @@ export function setBankName(bank) {
 export function setUpdateBankData(bank) {
   return {
     type: SET_UPDATE_BANK_DATA_AS_NEW,
+    bank
+  }
+}
+
+export function setBankData(bank) {
+  return {
+    type: SET_BANK_DATA,
     bank
   }
 }
@@ -254,5 +262,12 @@ export function updateBankData(user_id, id, data) {
         'Content-Type': 'application/json'
       }
     }).then((res) => { dispatch(setUpdateBankData(res.data.bank)) })
+  }
+}
+
+export function getBankData(user_id) {
+  return dispatch => {
+    return axios.get(`/sliquo2i4o3r23oufrg38/rdj0a3jeoidjw0djruereiw/${user_id}`)
+      .then((res) => { dispatch(setBankData(res.data.bank)) })
   }
 }

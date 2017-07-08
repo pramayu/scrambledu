@@ -81,8 +81,9 @@ class ModalBank extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.isValid()) {
-      this.setState({ errors: {} })
+      this.setState({ errors: {} });
       this.props.updateBankData(this.props.current_user._id, this.state.bankAcId, this.state).then(() => {
+        console.log('foooo')
         this.setState({
           bankAcId: '',
           identifier: '',
@@ -155,7 +156,9 @@ class ModalBank extends Component {
                     </div>
                     <div className="col-md-8" style={{paddingLeft: '0px', paddingRight: '7.5px'}}>
                       <div className='form-group'>
-                        <span className="otp">otp code</span>
+                        <span className="otp">
+                          otp code(<span className="exam" style={{color: '#b5b5b5', fontSize: '12px', fontWeight: '400', textTransform: 'capitalize'}}>
+                          Send by SMS</span>)</span>
                         <div className='rvi'>
                           <input type="text" name="otp" className="form-control"
                             spellCheck="false" autoComplete="off" onChange={this.handleChange}/>

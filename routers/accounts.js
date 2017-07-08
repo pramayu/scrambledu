@@ -4,6 +4,7 @@ var async = require('async');
 var randomstring = require('randomstring');
 var twilio = require('twilio');
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 
 var config = require('../config/main');
 var user = require('../models/user');
@@ -248,6 +249,9 @@ router.get('/diwejr834refeiufhwuihf/dk038ejdksjkflsfkjdf/:user_id/:id', (req, re
 router.put('/dk309j03d9j0dj0dh32/:user_id/398erj9r8h39r8h98r/:id/', (req, res, next) => {
   var user_id = req.params.user_id;
   var _id = req.params.id;
+  var encrypt_rek = jwt.sign({
+    rekening: req.body.rekening
+  }, config.secret_key)
   async.waterfall([
     function getUser(done) {
       user.findOne({'_id': user_id}, '_id username password', (err, user) => {
@@ -264,7 +268,7 @@ router.put('/dk309j03d9j0dj0dh32/:user_id/398erj9r8h39r8h98r/:id/', (req, res, n
               if(user_id.toString() === bank.user.toString()) {
                 if(req.body.otp.toString() === bank.otp.toString()) {
                   bank.identifier = req.body.identifier || bank.identifier;
-                  bank.rekening = req.body.rekening || bank.rekening;
+                  bank.rekening = encrypt_rek || bank.rekening;
                   bank.bankname = req.body.bankname || bank.bankname;
                   bank.branch = req.body.branch || bank.branch;
                   bank.save((err, bank) => {
@@ -285,10 +289,26 @@ router.put('/dk309j03d9j0dj0dh32/:user_id/398erj9r8h39r8h98r/:id/', (req, res, n
           res.status(500).json({ errors: { form: 'password is invalid'} })
         }
       })
+    },
+    function _findBank(bank, done) {
+      bankAccount.find({'_id': bank._id})
+        .populate('bankname')
+        .exec((err, bank) => {
+          done(null, bank)
+        })
     }
   ], (err, bank) => {
     res.json({ bank })
   })
+})
+
+router.get('/rdj0a3jeoidjw0djruereiw/:user_id', (req, res, next) => {
+  var user_id = req.params.user_id;
+  bankAccount.find({'user': user_id})
+    .populate('bankname')
+    .exec((err, bank) => {
+      res.json({ bank })
+    })
 })
 
 module.exports = router;

@@ -9,6 +9,7 @@ import DashNav from '../../../shared/dashboardnav';
 import { settingUser } from '../../../../validate/setting';
 import ModalAddress from './modal_address';
 import ModalBank from './modal_bank';
+import BankAccountList from './bank_account_list';
 import {
   setFetchAccount,
   editUserAccount,
@@ -25,7 +26,8 @@ import {
   addNewBankAccount,
   delBankNewAccount,
   sendOtpCode,
-  updateBankData } from '../../../actions/accounts';
+  updateBankData,
+  getBankData } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -75,6 +77,7 @@ class UserSetting extends Component {
     this.props.getUserPreferences(this.props.current_user.user._id)
     this.props.getProvince()
     this.props.getAddressReceiver(this.props.current_user.user._id)
+    this.props.getBankData(this.props.current_user.user._id)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -215,6 +218,7 @@ class UserSetting extends Component {
 
   render() {
     let address = Object.assign([], this.props.address)
+    let _banks = Object.assign([], this.props.bank_accounts)
     let addressLoop = (
       address.map((addr, id) => {
         return (
@@ -237,6 +241,14 @@ class UserSetting extends Component {
               <span className="fa fa-trash-o" onClick = { this.deleteAddressReceiver.bind(this, addr._id) }></span>
             </li>
           </ul>
+        )
+      })
+    )
+
+    let bankLoop = (
+      _banks.map((bank, id) => {
+        return (
+          <BankAccountList bank = {bank} id = {id} key = {id}/>
         )
       })
     )
@@ -441,16 +453,7 @@ class UserSetting extends Component {
                   <li className="adres">BANK NAME</li>
                   <li className="action">ACTION</li>
                 </ul>
-                <ul className="list-unstyled chft cgyuo">
-                  <li className="name">Entis Sutisna</li>
-                  <li className="receiver">008801036884507</li>
-                  <li className="phone">Singaraja</li>
-                  <li className="adres">PT. BANK RAKYAT INDONESIA (PERSERO)</li>
-                  <li className="action">
-                    <span className="fa fa-pencil-square-o"></span>
-                    <span className="fa fa-trash-o"></span>
-                  </li>
-                </ul>
+                { bankLoop }
               </div>
             </div>
           </div>
@@ -461,7 +464,7 @@ class UserSetting extends Component {
           resetEditAddr = { this.resetEditAddr } getEditAddress = {this.props.getEditAddress}/>
         <ModalBank current_user = { this.props.current_user.user} bank = { this.props.bank }
           bankAc = { bankAc } delBankNewAccount = {this.props.delBankNewAccount} sendOtpCode = {this.props.sendOtpCode}
-          updateBankData = { this.props.updateBankData }/>
+          updateBankData = { this.props.updateBankData } />
       </div>
     )
   }
@@ -476,7 +479,8 @@ function mapStateToProps(state) {
     regencies: state.regencies,
     districts: state.districts,
     address: state.addresses,
-    bank: state.bank
+    bank: state.bank,
+    bank_accounts: state.bank_accounts
   }
 }
 
@@ -497,7 +501,8 @@ function mapDispatchToProps(dispatch) {
     addNewBankAccount: (user_id, data) => dispatch(addNewBankAccount(user_id, data)),
     delBankNewAccount: (user_id, id) => dispatch(delBankNewAccount(user_id, id)),
     sendOtpCode: (user_id, id) => dispatch(sendOtpCode(user_id, id)),
-    updateBankData: (user_id, id, data) => dispatch(updateBankData(user_id, id, data))
+    updateBankData: (user_id, id, data) => dispatch(updateBankData(user_id, id, data)),
+    getBankData: (user_id) => dispatch(getBankData(user_id))
   }
 }
 
