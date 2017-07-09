@@ -114,7 +114,7 @@ router.post('/oi39ry94gf3o98flk/:id/dj8459hf3f9hf948y983', (req, res, next) => {
       var addr = new address();
       addr.identifier = req.body.identifier;
       addr.receiver = req.body.receiver;
-      addr.phone = req.body.phone;
+      addr.phone = req.body.phone_addr;
       addr.province = parseInt(req.body.province);
       addr.regency = parseInt(req.body.regency);
       addr.district = parseInt(req.body.district);
@@ -162,7 +162,7 @@ router.put('/doi3ue938hd9dhweoih/:id/:user_id', (req, res, next) => {
         if(addr.user.toString() === user_id.toString()) {
           addr.identifier = req.body.identifier || addr.identifier;
           addr.receiver = req.body.receiver || addr.receiver;
-          addr.phone = req.body.phone || addr.phone;
+          addr.phone = req.body.phone_addr || addr.phone;
           addr.province = req.body.province || addr.province;
           addr.regency = req.body.regency || addr.regency;
           addr.district = req.body.district || addr.district;
@@ -291,7 +291,7 @@ router.put('/dk309j03d9j0dj0dh32/:user_id/398erj9r8h39r8h98r/:id/', (req, res, n
       })
     },
     function _findBank(bank, done) {
-      bankAccount.find({'_id': bank._id})
+      bankAccount.findOne({'_id': bank._id})
         .populate('bankname')
         .exec((err, bank) => {
           done(null, bank)
@@ -309,6 +309,13 @@ router.get('/rdj0a3jeoidjw0djruereiw/:user_id', (req, res, next) => {
     .exec((err, bank) => {
       res.json({ bank })
     })
+})
+
+router.delete('/dwidoqiwdaowdhowidh/:id', (req, res, next) => {
+  var id = req.params.id
+  bankAccount.findByIdAndRemove(id, (err, bank) => {
+    res.json({ success: 'successfully' })
+  })
 })
 
 module.exports = router;

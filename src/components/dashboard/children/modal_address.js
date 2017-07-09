@@ -10,7 +10,7 @@ class ModalAddress extends Component {
     this.state = {
       identifier: '',
       receiver: '',
-      phone: '',
+      phone_addr: '',
       province: 'choose_default',
       regency: 'choose_default',
       district: 'choose_default',
@@ -29,15 +29,17 @@ class ModalAddress extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      identifier: nextProps.addrs_.identifier ? nextProps.addrs_.identifier : '',
-      receiver: nextProps.addrs_.receiver ? nextProps.addrs_.receiver : '',
-      phone: nextProps.addrs_.phone ? nextProps.addrs_.phone : '',
-      address: nextProps.addrs_.address ? nextProps.addrs_.address : '',
-      zipcode: nextProps.addrs_.zipcode ? nextProps.addrs_.zipcode : '',
-      address_edt: nextProps.addrs_.address_edt ? nextProps.addrs_.address_edt : false,
-      addr_id: nextProps.addrs_._id ? nextProps.addrs_._id : '',
-    })
+    if(nextProps.addrs_.address_edt === true) {
+      this.setState({
+        identifier: nextProps.addrs_.identifier ? nextProps.addrs_.identifier : '',
+        receiver: nextProps.addrs_.receiver ? nextProps.addrs_.receiver : '',
+        phone_addr: nextProps.addrs_.phone_addr ? nextProps.addrs_.phone_addr : '',
+        address: nextProps.addrs_.address ? nextProps.addrs_.address : '',
+        zipcode: nextProps.addrs_.zipcode ? nextProps.addrs_.zipcode : '',
+        address_edt: nextProps.addrs_.address_edt ? nextProps.addrs_.address_edt : false,
+        addr_id: nextProps.addrs_._id ? nextProps.addrs_._id : '',
+      })
+    }
   }
 
   getRegencyChange(e) {
@@ -79,7 +81,7 @@ class ModalAddress extends Component {
         this.setState({
           identifier: '',
           receiver: '',
-          phone: '',
+          phone_addr: '',
           province: 'choose_default',
           regency: 'choose_default',
           district: 'choose_default',
@@ -105,7 +107,7 @@ class ModalAddress extends Component {
         this.setState({
           identifier: '',
           receiver: '',
-          phone: '',
+          phone_addr: '',
           province: 'choose_default',
           regency: 'choose_default',
           district: 'choose_default',
@@ -179,10 +181,10 @@ class ModalAddress extends Component {
                       </div>
                     </div>
                     <div className="col-md-6" style={{paddingLeft: '0px', paddingRight: '7.5px'}}>
-                      <div className={ classnames('form-group', { 'has-error': errors.phone })}>
+                      <div className={ classnames('form-group', { 'has-error': errors.phone_addr })}>
                         <span className="phone">phone</span>
                         <div className="rvi">
-                          <input type="text" name="phone" value={this.state.phone} className="form-control"
+                          <input type="text" name="phone_addr" value={this.state.phone_addr} className="form-control"
                             spellCheck="false" onChange={this.handleChange} autoComplete="off"/>
                         </div>
                       </div>

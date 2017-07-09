@@ -4,6 +4,10 @@ import jwt from 'jsonwebtoken';
 
 class BankAccountList extends Component {
 
+  removeBankAccount() {
+    this.props.deleteBankData(this.props.bank._id)
+  }
+
   render() {
     var nomorRekening = jwt.decode(this.props.bank.rekening)
     return (
@@ -13,8 +17,7 @@ class BankAccountList extends Component {
         <li className="phone">{ this.props.bank.branch }</li>
         <li className="adres">{ this.props.bank.bankname.name }</li>
         <li className="action">
-          <span className="fa fa-pencil-square-o"></span>
-          <span className="fa fa-trash-o"></span>
+          <span className="fa fa-trash-o" onClick={ this.removeBankAccount.bind(this) }></span>
         </li>
       </ul>
     )

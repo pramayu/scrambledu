@@ -27,7 +27,8 @@ import {
   delBankNewAccount,
   sendOtpCode,
   updateBankData,
-  getBankData } from '../../../actions/accounts';
+  getBankData,
+  deleteBankData } from '../../../actions/accounts';
 
 
 class UserSetting extends Component {
@@ -54,7 +55,7 @@ class UserSetting extends Component {
       isLoading: false,
       identifier: '',
       receiver: '',
-      phone: '',
+      phone_addr: '',
       province: 0,
       regency: 0,
       district: 0,
@@ -174,7 +175,7 @@ class UserSetting extends Component {
         this.setState({
           identifier: addr.identifier,
           receiver: addr.receiver,
-          phone: addr.phone,
+          phone_addr: addr.phone,
           province: addr.province._id,
           regency: addr.regency._id,
           district: addr.district._id,
@@ -191,7 +192,7 @@ class UserSetting extends Component {
     this.setState({
       identifier: '',
       receiver: '',
-      phone: '',
+      phone_addr: '',
       province: 0,
       regency: 0,
       district: 0,
@@ -199,7 +200,6 @@ class UserSetting extends Component {
       zipcode: '',
       address_edt: false,
       addr_id: '',
-      newAc: false
     })
   }
 
@@ -248,7 +248,8 @@ class UserSetting extends Component {
     let bankLoop = (
       _banks.map((bank, id) => {
         return (
-          <BankAccountList bank = {bank} id = {id} key = {id}/>
+          <BankAccountList bank={bank} id={id} key={id}
+            deleteBankData={ this.props.deleteBankData }/>
         )
       })
     )
@@ -257,7 +258,7 @@ class UserSetting extends Component {
       _id: this.state.addr_id,
       identifier: this.state.identifier,
       receiver: this.state.receiver,
-      phone: this.state.phone,
+      phone_addr: this.state.phone_addr,
       province: this.state.province,
       regency: this.state.regency,
       district: this.state.district,
@@ -502,7 +503,8 @@ function mapDispatchToProps(dispatch) {
     delBankNewAccount: (user_id, id) => dispatch(delBankNewAccount(user_id, id)),
     sendOtpCode: (user_id, id) => dispatch(sendOtpCode(user_id, id)),
     updateBankData: (user_id, id, data) => dispatch(updateBankData(user_id, id, data)),
-    getBankData: (user_id) => dispatch(getBankData(user_id))
+    getBankData: (user_id) => dispatch(getBankData(user_id)),
+    deleteBankData: (id) => dispatch(deleteBankData(id))
   }
 }
 

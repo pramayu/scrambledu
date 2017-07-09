@@ -9,8 +9,8 @@ export function addressReceiver(data) {
   if(validator.isEmpty(data.receiver)) {
     errors.receiver = 'this field is required';
   }
-  if(validator.isEmpty(data.phone)) {
-    errors.phone = 'this field is required';
+  if(validator.isEmpty(data.phone_addr)) {
+    errors.phone_addr = 'this field is required';
   }
   if(validator.isEmpty(data.address)) {
     errors.address = 'this field is required';
