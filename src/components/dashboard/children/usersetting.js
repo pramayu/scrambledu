@@ -74,11 +74,11 @@ class UserSetting extends Component {
   }
 
   componentWillMount() {
-    this.props.setFetchAccount(this.props.current_user.user._id)
-    this.props.getUserPreferences(this.props.current_user.user._id)
+    this.props.setFetchAccount(this.props.current_user.user.id)
+    this.props.getUserPreferences(this.props.current_user.user.id)
     this.props.getProvince()
-    this.props.getAddressReceiver(this.props.current_user.user._id)
-    this.props.getBankData(this.props.current_user.user._id)
+    this.props.getAddressReceiver(this.props.current_user.user.id)
+    this.props.getBankData(this.props.current_user.user.id)
   }
 
   componentWillReceiveProps(nextProps) {

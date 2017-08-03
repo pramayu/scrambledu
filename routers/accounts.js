@@ -143,6 +143,7 @@ router.get('/doi3e3089e3dhdeih/:id/diw8903938249rhhkj', (req, res, next) => {
     .populate('province regency district')
     .exec((err, addr) => {
       res.json({ address: addr})
+      console.log(addr)
     })
 })
 

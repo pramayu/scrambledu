@@ -27,7 +27,7 @@ class Dashboard extends Component {
           <div className="content">
             <div className="left-navbar" style={{height: this.state.height + 'px'}}>
               <div className="logo">
-                <span className="logo_text">MIX<span className="u">MART</span></span>
+                <span className="logo_text">Mix<span className="u">Mart</span></span>
                 <span className="icon ion-navicon-round pull-right"></span>
               </div>
               <div className="profile_pc">
@@ -83,11 +83,14 @@ class Dashboard extends Component {
                 </div>
                 <div className={classnames('non_seller vui', { 'dhetr': '2' === this.state.active})}>
                   <ul className="list-unstyled viu">
-                    <li><span className="cfe"><span className="icon ion-ios-albums-outline"></span></span><a href="#">my shop</a></li>
+                    <li><span className="cfe"><span className="icon ion-ios-albums-outline"></span></span>
+                      <Link to="/shop/dashboard" activeClassName="actives">my shop</Link>
+                    </li>
                     <li><span className="cfe"><span className="icon ion-ios-book-outline"></span></span><a href="#">Sell</a></li>
                     <li><span className="cfe chat"><span className="icon ion-ios-chatboxes-outline"></span></span><a href="#">Messages</a></li>
                     <li><span className="cfe part"><span className="icon ion-ios-flower-outline"></span></span><a href="#">Partner</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-analytics-outline"></span></span><a href="#">Statistic</a></li>
+                    <li><span className="cfe trans"><span className="icon ion-ios-box-outline"></span></span><a href="#">Transaction</a></li>
                     <li><span className="cfe"><span className="icon ion-ios-pulse-strong"></span></span><a href="#">Manage Shop</a></li>
                   </ul>
                 </div>
