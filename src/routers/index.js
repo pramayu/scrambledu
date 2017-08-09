@@ -36,7 +36,7 @@ module.exports = {
       path: 'shop',
       component: Dashboard,
       childRoutes: [
-        { path: 'dashboard', component: MyShop }
+        { path: 'main', component: MyShop } //sementara pake parameter shop name
       ]
     }
   ]

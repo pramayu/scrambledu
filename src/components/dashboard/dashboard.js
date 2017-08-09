@@ -27,7 +27,7 @@ class Dashboard extends Component {
           <div className="content">
             <div className="left-navbar" style={{height: this.state.height + 'px'}}>
               <div className="logo">
-                <span className="logo_text">Mix<span className="u">Mart</span></span>
+                <span className="logo_text">Mix<span className="u">mart</span></span>
                 <span className="icon ion-navicon-round pull-right"></span>
               </div>
               <div className="profile_pc">
@@ -84,7 +84,7 @@ class Dashboard extends Component {
                 <div className={classnames('non_seller vui', { 'dhetr': '2' === this.state.active})}>
                   <ul className="list-unstyled viu">
                     <li><span className="cfe"><span className="icon ion-ios-albums-outline"></span></span>
-                      <Link to="/shop/dashboard" activeClassName="actives">my shop</Link>
+                      <Link to="/shop/main" activeClassName="actives">my shop</Link>
                     </li>
                     <li><span className="cfe"><span className="icon ion-ios-book-outline"></span></span><a href="#">Sell</a></li>
                     <li><span className="cfe chat"><span className="icon ion-ios-chatboxes-outline"></span></span><a href="#">Messages</a></li>
